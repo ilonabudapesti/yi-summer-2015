@@ -1,5 +1,10 @@
 # Yoga Institute Summer Code Camp 2015
 
+# TOC
+
+- [Install Fest]
+- [Pre-camp Reading]
+
 ## Install Fest
 
 Estimated time needed: 2 hrs.
@@ -44,3 +49,14 @@ $ git config --global core.editor "subl -n -w"
       - package manager
       - recommended packages
       - key mappings
+
+## Pre-Camp Reading
+
+- JS The Definitive Guide 6th ed. Chapters 1-8
+- [JS Types](https://blogs.adobe.com/webplatform/2012/08/27/javascript-types/)
+- [JS Operators](https://blogs.adobe.com/webplatform/2012/09/21/javascript-operators/)
+- Dev Tools
+   - If you prefer to watch videos: [Discover Dev Tools](http://discover-devtools.codeschool.com/)
+   - If you prefer to read: [Dev Tools Docs](https://developer.chrome.com/devtools)
+   - Dev Tools [Cheatsheet](http://anti-code.com/devtools-cheatsheet/)
+   - Advanced features [list on StackOverflow](http://stackoverflow.com/questions/16752622/chrome-developer-tools-best-resource-for-learning-advanced-features)
