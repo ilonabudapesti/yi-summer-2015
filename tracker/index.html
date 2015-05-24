@@ -74,7 +74,7 @@
 				<textarea class="form-control" rows="3" id="inputDescription"></textarea>
 			  </div>
 			  <div class="form-group">
-				<label for="inputTags">Tags</label>
+				<label for="inputTags">Tags (Separate tags with commas) </label>
 				<input type="text" class="form-control" id="inputTags">
 			  </div>
 			</form>
@@ -83,11 +83,12 @@
         <div class="col-md-8">
           <h2>Your Entries</h2>
           <p id="noEntryMessage" class="bg-info" style="padding:20px">Uh oh. You haven't written any entries yet. The Tracker Tractor is feeling bored.</p>
-          <table id="entryTable" class="table table-hover">
+          <table id="entryTable" class="table table-hover" style="display:none;">
 			  <thead>
 				<tr>
 				  <th>Start</th>
 				  <th>End</th>
+				  <th>Duration</th>
 				  <th>Description</th>
 				  <th>Tags</th>
 				  <th></th>
@@ -96,6 +97,9 @@
 			  <tbody id="entryRows">
 			  </tbody>
 			</table>
+			
+			<hr style="margin-top:40px">
+			<h2>Your Stats</h2>
        </div>
       </div>
 
@@ -109,13 +113,17 @@
         <script src="js/main.js"></script>
         <script>
         	var allEntries = [];
+        	var entryID = 0;
         	
         	function Entry(start, end, description, tags)
 			{
-				this.start = start;
-				this.end = end;
+				this.start = new Date(start);
+				this.end = new Date(end);
 				this.description = description;
 				this.tags = tags;
+				
+				this.duration = this.end - this.start;
+				this.id = ++entryID;
 			}
         	
         	var addEntry = function() {
@@ -127,16 +135,21 @@
         		var newEntry = new Entry(start, end, description, tags);
         		allEntries.push(newEntry);
         		
-        		$('#entryRows').append('<tr><td>' + start + '</td><td>' + end + '</td><td>' + description + '</td><td>' + tags + '</td><td><button onclick="removeEntry(this)" type="button" class="close" aria-label="Close"><span aria-hidden="true">&times;</span></button></td></tr>');
-        		
-        		console.log(allEntries);
+        		updateEntries();
         	}
         	
         	var removeEntry = function(element) {
-			   $(element).closest('tr').remove();
+			   	var removeID = $(element).closest('tr').data('entry-id');
+			   
+			   	allEntries = $.grep(allEntries, function(entry) {
+				  	return entry.id !== removeID;
+				});
+				
+				updateEntries();
         	}
         	
         	var updateEntries = function() {
+        		//If entries are present show table. Otherwise show no entry message.
         		if(allEntries.length === 0) {
         			$('#noEntryMessage').show();
         			$('#entryTable').hide();
@@ -146,6 +159,14 @@
         			$('#noEntryMessage').hide();
         			$('#entryTable').show();
         		}
+        		
+        		//Empty table rows
+        		$('#entryRows').empty();
+        		
+        		//Rebuild the table from the allEntries array
+        		$.each(allEntries, function() {
+        			$('#entryRows').append('<tr data-entry-id="' + this.id + '"><td>' + this.start + '</td><td>' + this.end + '</td><td>' + this.duration + '</td><td>' + this.description + '</td><td>' + this.tags + '</td><td><button onclick="removeEntry(this)" type="button" class="close" aria-label="Close"><span aria-hidden="true">&times;</span></button></td></tr>');
+				});
         	}
         	
         
