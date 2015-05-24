@@ -32,6 +32,7 @@
           </button>
           <a class="navbar-brand" href="#">Tracker Tractor</a>
         </div>
+        <!--
         <div id="navbar" class="navbar-collapse collapse">
           <form class="navbar-form navbar-right" role="form">
             <div class="form-group">
@@ -42,6 +43,7 @@
             </div>
             <button type="submit" class="btn btn-success">Sign in</button>
           </form>
+        -->
         </div><!--/.navbar-collapse -->
       </div>
     </nav>
@@ -82,7 +84,7 @@
         </div>
         <div class="col-md-8">
           <h2>Your Entries</h2>
-          <p id="noEntryMessage" class="bg-info" style="padding:20px">Uh oh. You haven't written any entries yet. The Tracker Tractor is feeling bored.</p>
+          <p id="noEntryMessage" class="bg-info" style="padding:20px">Uh oh... You haven't written any entries yet. Tracker Tractor is feeling bored.</p>
           <table id="entryTable" class="table table-hover" style="display:none;">
 			  <thead>
 				<tr>
@@ -112,15 +114,20 @@
         <script src="js/vendor/bootstrap.min.js"></script>
         <script src="js/main.js"></script>
         <script>
+        	//TODO: move to separate js file
+        	
         	var allEntries = [];
         	var entryID = 0;
+        	
+        	var now = $.now();
+        	$('#inputStart').val(now);
         	
         	function Entry(start, end, description, tags)
 			{
 				this.start = new Date(start);
 				this.end = new Date(end);
 				this.description = description;
-				this.tags = tags;
+				this.tags = tags.split(',');
 				
 				this.duration = this.end - this.start;
 				this.id = ++entryID;
