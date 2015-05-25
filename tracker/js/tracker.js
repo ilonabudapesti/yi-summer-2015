@@ -1,8 +1,11 @@
 var allEntries = [];
 var entryID = 0;
 
-var now = $.now();
-$('#inputStart').val(now);
+var dateTimeNow = new Date();
+var currentDateString = dateTimeNow.toISOString();
+currentDateString = currentDateString.substring(0, currentDateString.length-8);
+$('#inputStart').val(currentDateString);
+$('#inputEnd').val(currentDateString);
 
 function Entry(start, end, description, tags)
 {
@@ -54,6 +57,14 @@ var updateEntries = function() {
 	
 	//Rebuild the table from the allEntries array
 	$.each(allEntries, function() {
-		$('#entryRows').append('<tr data-entry-id="' + this.id + '"><td>' + this.start.toISOString() + '</td><td>' + this.end.toISOString() + '</td><td>' + this.duration + '</td><td>' + this.description + '</td><td>' + this.tags + '</td><td><button onclick="removeEntry(this)" type="button" class="close" aria-label="Close"><span aria-hidden="true">&times;</span></button></td></tr>');
+		$('#entryRows').append('<tr data-entry-id="' 
+			+ this.id + '"><td>' 
+			+ this.start.toISOString() + '</td><td>' 
+			+ this.end.toISOString() + '</td><td>' 
+			+ this.duration + '</td><td>' 
+			+ this.description + '</td><td>' 
+			+ this.tags + '</td><td>'
+			+ '<button style="float:none;" onclick="removeEntry(this)" type="button" class="close" aria-label="Close"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></button>&nbsp;'
+			+ '<button style="float:none;" onclick="removeEntry(this)" type="button" class="close" aria-label="Close"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button></td></tr>');
 	});
 }
