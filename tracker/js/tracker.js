@@ -19,15 +19,18 @@ function Entry(start, end, description, tags)
 }
 
 var addEntry = function() {
+	
 	var start = $('#inputStart').val();
 	var end = $('#inputEnd').val();
 	var description = $('#inputDescription').val();
 	var tags = $('#inputTags').val();
 	
-	var newEntry = new Entry(start, end, description, tags);
-	allEntries.push(newEntry);
-	
-	updateEntries();
+	if(start !== '' && end !== '') {
+		var newEntry = new Entry(start, end, description, tags);
+		allEntries.push(newEntry);
+		
+		updateEntries();
+	}
 }
 
 var removeEntry = function(element) {
@@ -57,10 +60,12 @@ var updateEntries = function() {
 	
 	//Rebuild the table from the allEntries array
 	$.each(allEntries, function() {
+		var startString = this.start.toString();
+		startString = startString.substring(0, startString.length-18);
+		
 		$('#entryRows').append('<tr data-entry-id="' 
 			+ this.id + '"><td>' 
-			+ this.start.toISOString() + '</td><td>' 
-			+ this.end.toISOString() + '</td><td>' 
+			+ startString + '</td><td>'  
 			+ this.duration + '</td><td>' 
 			+ this.description + '</td><td>' 
 			+ this.tags + '</td><td>'
@@ -96,8 +101,6 @@ var editEntry = function(element) {
 	$('#editDescription').val(editDescription);
 	$('#editTags').val(editTags.toString());
 	$('#editSaveButton').attr('onclick','saveChanges(' + editID + ')');
-
-
 }
 
 var saveChanges = function(editID) {
@@ -123,9 +126,9 @@ var saveChanges = function(editID) {
 }
 
 var buildStats = function() {
-	var statsByDay = [];
-	var statsByMonth = [];
-	var statsByTag = [];
+	var statsByDay = {};
+	var statsByMonth = {};
+	var statsByTag = {};
 
 	for (var i in allEntries) {
 		var startStringDay = allEntries[i].start.toISOString();
@@ -141,10 +144,41 @@ var buildStats = function() {
         	statsByMonth[ startStringMonth ] = allEntries[i].duration;
         }
         else statsByMonth[ startStringMonth ] += allEntries[i].duration;
-
-        if(statsByTag[ allEntries[i].tags ] === undefined) {
-        	statsByTag[ allEntries[i].tags ] = allEntries[i].duration;
-        }
-        else statsByTag[ allEntries[i].tags ] += allEntries[i].duration;
+        
+        for (var k in allEntries[i].tags) {
+		    if(allEntries[i].tags[k] != "") {
+		        if(statsByTag[ allEntries[i].tags[k] ] === undefined) {
+		        	statsByTag[ allEntries[i].tags[k] ] = allEntries[i].duration;
+		        }
+		        else statsByTag[ allEntries[i].tags[k] ] += allEntries[i].duration;
+		    }
+	    }
 	}
+
+	//Empty By Day table rows
+	$('#statsByDayRows').empty();
+	//Rebuild the By Day table from the statsByDay object
+	$.each(statsByDay, function(key,value) {
+		$('#statsByDayRows').append('<tr><td>' 
+			+ key + '</td><td>' 
+			+ value + '</td></tr>');
+	});
+
+	//Empty By Month table rows
+	$('#statsByMonthRows').empty();
+	//Rebuild the By Month table from the statsByMonth object
+	$.each(statsByMonth, function(key,value) {
+		$('#statsByMonthRows').append('<tr><td>' 
+			+ key + '</td><td>' 
+			+ value + '</td></tr>');
+	});
+
+	//Empty By Tag table rows
+	$('#statsByTagRows').empty();
+	//Rebuild the By Month table from the statsByMonth object
+	$.each(statsByTag, function(key,value) {
+		$('#statsByTagRows').append('<tr><td>' 
+			+ key + '</td><td>' 
+			+ value + '</td></tr>');
+	});
 }
