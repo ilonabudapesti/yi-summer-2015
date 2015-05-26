@@ -64,9 +64,11 @@ var updateEntries = function() {
 			+ this.duration + '</td><td>' 
 			+ this.description + '</td><td>' 
 			+ this.tags + '</td><td>'
-			+ '<button style="float:none;" onclick="editEntry(this)" type="button" class="close" aria-label="Close" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></button>&nbsp;'
+			+ '<button style="float:none;" onclick="editEntry(this)" type="button" class="close" aria-label="Close" data-toggle="modal" data-target="#modalEdit"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></button>&nbsp;'
 			+ '<button style="float:none;" onclick="removeEntry(this)" type="button" class="close" aria-label="Close"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button></td></tr>');
 	});
+
+	buildStats();
 }
 
 var editEntry = function(element) {
@@ -118,4 +120,31 @@ var saveChanges = function(editID) {
 	}
 
 	updateEntries();
+}
+
+var buildStats = function() {
+	var statsByDay = [];
+	var statsByMonth = [];
+	var statsByTag = [];
+
+	for (var i in allEntries) {
+		var startStringDay = allEntries[i].start.toISOString();
+		startStringDay = startStringDay.substring(0, startStringDay.length-14);
+		if(statsByDay[ startStringDay ] === undefined) {
+			statsByDay[ startStringDay ] = allEntries[i].duration;
+		}
+        else statsByDay[ startStringDay ] += allEntries[i].duration;
+
+        var startStringMonth = allEntries[i].start.toISOString();
+		startStringMonth = startStringMonth.substring(0, startStringMonth.length-17);
+        if(statsByMonth[ startStringMonth ] === undefined) {
+        	statsByMonth[ startStringMonth ] = allEntries[i].duration;
+        }
+        else statsByMonth[ startStringMonth ] += allEntries[i].duration;
+
+        if(statsByTag[ allEntries[i].tags ] === undefined) {
+        	statsByTag[ allEntries[i].tags ] = allEntries[i].duration;
+        }
+        else statsByTag[ allEntries[i].tags ] += allEntries[i].duration;
+	}
 }

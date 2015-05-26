@@ -102,11 +102,70 @@
 			
 			<hr style="margin-top:40px">
 			<h2>Your Stats</h2>
+			<div class="row">
+			  <div class="col-md-4">
+		  		<div class="panel panel-info">
+			      <div class="panel-heading">
+			        <h3 class="panel-title" id="panel-title">By Day</h3>
+			      </div>
+			      <div class="panel-body">
+			        <table id="statsByDayTable" class="table table-hover">
+					  <thead>
+						<tr>
+						  <th>Day</th>
+						  <th>Duration (Min)</th>
+						</tr>
+					  </thead>
+					  <tbody id="statsByDayRows">
+					  </tbody>
+					</table>
+			      </div>
+			    </div>
+			  </div>
+			  <div class="col-md-4">
+			  	<div class="panel panel-info">
+			      <div class="panel-heading">
+			        <h3 class="panel-title" id="panel-title">By Month</h3>
+			      </div>
+			      <div class="panel-body">
+			        <table id="statsByMonthTable" class="table table-hover">
+					  <thead>
+						<tr>
+						  <th>Month</th>
+						  <th>Duration (Min)</th>
+						</tr>
+					  </thead>
+					  <tbody id="statsByMonthRows">
+					  </tbody>
+					</table>
+			      </div>
+			    </div>
+			  </div>
+			  <div class="col-md-4">
+			  	<div class="panel panel-info">
+			      <div class="panel-heading">
+			        <h3 class="panel-title" id="panel-title">By Tag</h3>
+			      </div>
+			      <div class="panel-body">
+			        <table id="statsByTagTable" class="table table-hover">
+					  <thead>
+						<tr>
+						  <th>Tag</th>
+						  <th>Duration (Min)</th>
+						</tr>
+					  </thead>
+					  <tbody id="statsByTagRows">
+					  </tbody>
+					</table>
+			      </div>
+			    </div>
+			  </div>
+			</div>
        </div>
       </div>
 
 		<!-- Modal window for editing entries -->
-		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal fade" id="modalEdit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 		  <div class="modal-dialog">
 		    <div class="modal-content">
 		      <div class="modal-header">
