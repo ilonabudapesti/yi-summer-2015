@@ -64,16 +64,58 @@ var updateEntries = function() {
 			+ this.duration + '</td><td>' 
 			+ this.description + '</td><td>' 
 			+ this.tags + '</td><td>'
-			+ '<button style="float:none;" onclick="editEntry(this)" type="button" class="close" aria-label="Close"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></button>&nbsp;'
+			+ '<button style="float:none;" onclick="editEntry(this)" type="button" class="close" aria-label="Close" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></button>&nbsp;'
 			+ '<button style="float:none;" onclick="removeEntry(this)" type="button" class="close" aria-label="Close"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button></td></tr>');
 	});
 }
 
 var editEntry = function(element) {
 	var editID = $(element).closest('tr').data('entry-id');
-
-	//edit entry
-
 	
+	for (var i in allEntries) {
+		if (allEntries[i].id === editID) {
+    		var editStart = allEntries[i].start;
+			var editEnd = allEntries[i].end;
+			var editDescription = allEntries[i].description;
+			var editTags = allEntries[i].tags;
+    		break;
+		}
+	}
+
+	var startString = editStart.toISOString();
+	startString = startString.substring(0, startString.length-8);
+
+	var endString = editEnd.toISOString();
+	endString = endString.substring(0, endString.length-8);
+
+	//set current values and onclick action for entry
+	$('#editStart').val(startString);
+	$('#editEnd').val(endString);
+	$('#editDescription').val(editDescription);
+	$('#editTags').val(editTags.toString());
+	$('#editSaveButton').attr('onclick','saveChanges(' + editID + ')');
+
+
+}
+
+var saveChanges = function(editID) {
+	//Get new values
+	var start = $('#editStart').val();
+	var end = $('#editEnd').val();
+	var description = $('#editDescription').val();
+	var tags = $('#editTags').val();
+
+	//Save new values to replace existing entry
+	for (var i in allEntries) {
+		if (allEntries[i].id === editID) {
+    		allEntries[i].start = new Date(start);
+			allEntries[i].end = new Date(end);
+			allEntries[i].description = description;
+			allEntries[i].tags = tags.split(',');
+			allEntries[i].duration = Math.floor( Math.abs(allEntries[i].end - allEntries[i].start) / 60000 ); 
+    		break;
+		}
+	}
+
 	updateEntries();
 }
