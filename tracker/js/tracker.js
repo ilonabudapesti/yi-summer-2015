@@ -64,7 +64,16 @@ var updateEntries = function() {
 			+ this.duration + '</td><td>' 
 			+ this.description + '</td><td>' 
 			+ this.tags + '</td><td>'
-			+ '<button style="float:none;" onclick="removeEntry(this)" type="button" class="close" aria-label="Close"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></button>&nbsp;'
+			+ '<button style="float:none;" onclick="editEntry(this)" type="button" class="close" aria-label="Close"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></button>&nbsp;'
 			+ '<button style="float:none;" onclick="removeEntry(this)" type="button" class="close" aria-label="Close"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button></td></tr>');
 	});
+}
+
+var editEntry = function(element) {
+	var editID = $(element).closest('tr').data('entry-id');
+
+	//edit entry
+
+	
+	updateEntries();
 }
