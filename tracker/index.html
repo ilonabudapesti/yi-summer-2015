@@ -82,6 +82,12 @@
 			</form>
 			<p><em>*Required</em></p>
 			 <button onclick="addEntry()" class="btn btn-primary">Save New Entry</button>
+			 <div id="dateWarning" class="alert alert-danger" role="alert" style="display:none;margin-top:10px;">
+			  <strong>Warning!</strong> Somethings wrong with those start and end dates.
+			</div>
+			<div id="entrySuccess" class="alert alert-success" role="alert" style="display:none;margin-top:10px;">
+			  <strong>Way to go!</strong> You created that entry without a hitch.
+			</div>
         </div>
         <div class="col-md-8">
           <h2>Your Entries</h2>

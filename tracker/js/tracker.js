@@ -17,18 +17,26 @@ function Entry(start, end, description, tags)
 }
 
 var addEntry = function() {
-	
 	var start = $('#inputStart').val();
 	var end = $('#inputEnd').val();
 	var description = $('#inputDescription').val();
 	var tags = $('#inputTags').val();
-	
-	if(start !== '' && end !== '') {
+
+	//Validate date before adding the entry
+	if(moment(start).isValid() && moment(end).isValid()) {
 		var newEntry = new Entry(start, end, description, tags);
 		allEntries.push(newEntry);
 		
 		updateEntries();
+		$('#entrySuccess').show();
+		$('#dateWarning').hide();
 	}
+	else {
+		//Throw error
+		$('#dateWarning').show();
+		$('#entrySuccess').hide();
+	}
+	
 }
 
 var removeEntry = function(element) {
