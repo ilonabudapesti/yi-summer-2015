@@ -1,16 +1,14 @@
 var allEntries = [];
 var entryID = 0;
 
-var dateTimeNow = new Date();
-var currentDateString = dateTimeNow.toISOString();
-currentDateString = currentDateString.substring(0, currentDateString.length-8);
+var currentDateString = moment().format('YYYY-MM-DDTHH:mm');
 $('#inputStart').val(currentDateString);
 $('#inputEnd').val(currentDateString);
 
 function Entry(start, end, description, tags)
 {
-	this.start = new Date(start);
-	this.end = new Date(end);
+	this.start = moment(start);
+	this.end = moment(end);
 	this.description = description;
 	this.tags = tags.split(',');
 	
@@ -60,8 +58,7 @@ var updateEntries = function() {
 	
 	//Rebuild the table from the allEntries array
 	$.each(allEntries, function() {
-		var startString = this.start.toString();
-		startString = startString.substring(0, startString.length-18);
+		var startString = moment(this.start).format("MMM D, YYYY, h:mma"); 
 		
 		$('#entryRows').append('<tr data-entry-id="' 
 			+ this.id + '"><td>' 
@@ -89,11 +86,9 @@ var editEntry = function(element) {
 		}
 	}
 
-	var startString = editStart.toISOString();
-	startString = startString.substring(0, startString.length-8);
+	var startString = moment(editStart).format('YYYY-MM-DDTHH:mm'); 
 
-	var endString = editEnd.toISOString();
-	endString = endString.substring(0, endString.length-8);
+	var endString = moment(editEnd).format('YYYY-MM-DDTHH:mm');
 
 	//set current values and onclick action for entry
 	$('#editStart').val(startString);
@@ -113,8 +108,8 @@ var saveChanges = function(editID) {
 	//Save new values to replace existing entry
 	for (var i in allEntries) {
 		if (allEntries[i].id === editID) {
-    		allEntries[i].start = new Date(start);
-			allEntries[i].end = new Date(end);
+    		allEntries[i].start = moment(start);
+			allEntries[i].end = moment(end);
 			allEntries[i].description = description;
 			allEntries[i].tags = tags.split(',');
 			allEntries[i].duration = Math.floor( Math.abs(allEntries[i].end - allEntries[i].start) / 60000 ); 
@@ -131,15 +126,13 @@ var buildStats = function() {
 	var statsByTag = {};
 
 	for (var i in allEntries) {
-		var startStringDay = allEntries[i].start.toISOString();
-		startStringDay = startStringDay.substring(0, startStringDay.length-14);
+		var startStringDay = moment(allEntries[i].start).format('YYYY-MM-DD');
 		if(statsByDay[ startStringDay ] === undefined) {
 			statsByDay[ startStringDay ] = allEntries[i].duration;
 		}
         else statsByDay[ startStringDay ] += allEntries[i].duration;
 
-        var startStringMonth = allEntries[i].start.toISOString();
-		startStringMonth = startStringMonth.substring(0, startStringMonth.length-17);
+        var startStringMonth = moment(allEntries[i].start).format('YYYY-MM');
         if(statsByMonth[ startStringMonth ] === undefined) {
         	statsByMonth[ startStringMonth ] = allEntries[i].duration;
         }
