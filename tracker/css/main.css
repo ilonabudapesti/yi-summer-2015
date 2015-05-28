@@ -1,0 +1,34 @@
+.center {
+    margin: 0 auto;
+}
+
+table, td, tr, thead, th {
+    border: 1px solid #11D;
+    border-spacing: 10px;   
+    border-width: 20;
+    /* border-collapse: collapse; */
+}
+
+td, th {
+    padding: 5px;
+}
+
+section {
+    padding: 25px;
+    background-color: #EFEFEF;
+}
+
+body {
+    width: 80%;
+}
+
+footer, header {
+    height: 70px;
+    background-color: #DDDDDD;
+}
+
+nav {
+    height: 20px;
+    background-color: #DDDEEE
+}
+
