@@ -16,8 +16,11 @@ $('document').ready( function () {
         savedObject.stop = $inputParents.children('input:eq(1)').val();
         savedObject.description = $inputParents.children('input:eq(2)').val();
         savedObject.tags = $inputParents.children('input:eq(3)').val();
-        
-        taskList.push(savedObject);
+
+        // Get the index relative to its .taskRow siblings
+        var index = $(e.target).parents('.taskRow').index();
+
+        taskList[ index ] = _.clone( savedObject );
 
         console.log(savedObject);
         console.log(taskList);
