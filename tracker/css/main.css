@@ -2,6 +2,10 @@
     margin: 0 auto;
 }
 
+.hidden {
+    visibility: none; 
+}
+
 table, td, tr, thead, th {
     border: 1px solid #11D;
     border-spacing: 10px;   
