@@ -10,7 +10,12 @@ table, td, tr, thead, th {
 }
 
 td, th {
-    padding: 5px;
+    padding: 8px;
+    width: 180px;
+}
+
+input {
+    width: 180px;
 }
 
 section {
@@ -32,3 +37,39 @@ nav {
     background-color: #DDDEEE
 }
 
+.button {
+    background-color: #DDDDDD;
+    padding: 4px;
+}
+
+.debug {
+    background-color: red;
+}
+
+/* http://css3buttongenerator.com/ */
+.btn {
+  background: #488ebd;
+  background-image: -webkit-linear-gradient(top, #488ebd, #6a9dbd);
+  background-image: -moz-linear-gradient(top, #488ebd, #6a9dbd);
+  background-image: -ms-linear-gradient(top, #488ebd, #6a9dbd);
+  background-image: -o-linear-gradient(top, #488ebd, #6a9dbd);
+  background-image: linear-gradient(to bottom, #488ebd, #6a9dbd);
+  -webkit-border-radius: 8;
+  -moz-border-radius: 8;
+  border-radius: 8px;
+  font-family: Arial;
+  color: #ffffff;
+  font-size: 15px;
+  padding: 5px 10px 5px 10px;
+  text-decoration: none;
+}
+
+.btn:hover {
+  background: #3cb0fd;
+  background-image: -webkit-linear-gradient(top, #3cb0fd, #3498db);
+  background-image: -moz-linear-gradient(top, #3cb0fd, #3498db);
+  background-image: -ms-linear-gradient(top, #3cb0fd, #3498db);
+  background-image: -o-linear-gradient(top, #3cb0fd, #3498db);
+  background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
+  text-decoration: none;
+}
