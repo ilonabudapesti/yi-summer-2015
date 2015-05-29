@@ -3,7 +3,7 @@
 }
 
 .hidden {
-    visibility: none; 
+    visibility: hidden; 
 }
 
 table, td, tr, thead, th {
