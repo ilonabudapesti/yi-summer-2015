@@ -36,7 +36,11 @@ $('document').ready( function () {
         $inputParents.children('input:first').after('<span>' + savedObject.description + '</span>').remove();
         $inputParents.children('input:first').after('<span>' + savedObject.tags + '</span>').remove();
 
+        // Hide Save button, and reveal Edit, Delete
         $(e.target).parents('.buttonTd').children('.btn-save').addClass('hidden');
+        $(e.target).parents('.buttonTd').children('.btn-edit').removeClass('hidden');
+        $(e.target).parents('.buttonTd').children('.btn-delete').removeClass('hidden');
+
 
     });
 
@@ -45,7 +49,8 @@ $('document').ready( function () {
 
         var $inputParents = $(e.target).parents('.taskRow').children();
 
-        // Un-hide save button
+        // Hide Edit button and reveal Save button
+        $(e.target).parents('.buttonTd').children('.btn-edit').addClass('hidden');
         $(e.target).parents('.buttonTd').children('.btn-save').removeClass('hidden');
 
         // Get the index relative to its .taskRow siblings
@@ -63,7 +68,21 @@ $('document').ready( function () {
         $inputParents.children('input:eq(2)').val( taskList[index].description )
         $inputParents.children('input:eq(3)').val( taskList[index].tags )
 
+    });
 
+    // Delete button
+    $('body').on('click', '.btn-delete', function (e) {
+
+        //var $inputParents = $(e.target).parents('.taskRow').children();
+
+        // Get the index relative to its .taskRow siblings
+        var index = $(e.target).parents('.taskRow').index();
+
+        // Remove row
+        $(e.target).parents('.taskRow').remove();
+
+        // Remove data
+        taskList.splice(index, 1);
 
     });
 
