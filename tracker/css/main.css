@@ -13,9 +13,11 @@ table, td, tr, thead, th {
     /* border-collapse: collapse; */
 }
 
-td, th {
+td, th, span {
     padding: 8px;
     width: 180px;
+    max-width: 180px;
+    overflow: scroll;
 }
 
 input {
