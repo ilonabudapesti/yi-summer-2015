@@ -9,7 +9,7 @@ $('document').ready( function () {
         
         var savedObject = {};
 
-        var $inputParents = $(e.target).parents('tr').children();
+        var $inputParents = $(e.target).parents('.taskRow').children();
 
         // Get input values
         savedObject.start = $inputParents.children('input:eq(0)').val();
@@ -27,17 +27,42 @@ $('document').ready( function () {
             $(e.target).parents('tbody').append( taskRow.clone() );
         }
 
-        // Replace input fields with regular text values
-        $inputParents.children('input:first').after(savedObject.start).remove();
-        $inputParents.children('input:first').after(savedObject.stop).remove();
-        $inputParents.children('input:first').after(savedObject.description).remove();
-        $inputParents.children('input:first').after(savedObject.tags).remove();
+        // Replace <input> fields with <span> elements containing input values
+        $inputParents.children('input:first').after('<span>' + savedObject.start + '</span>').remove();
+        $inputParents.children('input:first').after('<span>' + savedObject.stop + '</span>').remove();
+        $inputParents.children('input:first').after('<span>' + savedObject.description + '</span>').remove();
+        $inputParents.children('input:first').after('<span>' + savedObject.tags + '</span>').remove();
 
         $(e.target).parents('.buttonTd').children('.btn-save').addClass('hidden');
 
     });
 
+    // Edit button
+    $('body').on('click', '.btn-edit', function (e) {
 
+        var $inputParents = $(e.target).parents('.taskRow').children();
+
+        // Un-hide save button
+        $(e.target).parents('.buttonTd').children('.btn-save').removeClass('hidden');
+
+        // Get the index relative to its .taskRow siblings
+        var index = $(e.target).parents('.taskRow').index();
+
+        // Replace <span> elements with <input> fields
+        $inputParents.children('span:first').after('<input type="text" name="start">').remove();
+        $inputParents.children('span:first').after('<input type="text" name="stop">').remove();
+        $inputParents.children('span:first').after('<input type="text" name="description">').remove();
+        $inputParents.children('span:first').after('<input type="text" name="tags">').remove();
+
+        // use the index to pull the matching record from taskList data model, and enter into <input> fields
+        $inputParents.children('input:eq(0)').val( taskList[index].start )
+        $inputParents.children('input:eq(1)').val( taskList[index].stop )
+        $inputParents.children('input:eq(2)').val( taskList[index].description )
+        $inputParents.children('input:eq(3)').val( taskList[index].tags )
+
+
+
+    });
 
 
 });
