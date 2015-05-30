@@ -1,13 +1,20 @@
+
+
 $('document').ready( function () {
+
+    var taskList = [];
 
     // Get a clean copy of the <tr> element for adding rows later 
     var taskRow = $('.taskRow').clone();
     
     // Set default Start/Stop times to now
-    $('.taskRow:first td input:eq(0)').val( new Date().toString().slice(0,-18) );
-    $('.taskRow:first td input:eq(1)').val( new Date().toString().slice(0,-18) );
+    $('.taskRow:first td input:eq(0)').val( new Date().toString().slice(4,-18) );
+    $('.taskRow:first td input:eq(1)').val( new Date().toString().slice(4,-18) );
 
-    var taskList = [];
+
+    //          #######################
+    //          #### BEGIN BUTTONS ####
+    //          #######################
 
     // Save button
     $('body').on('click', '.btn-save', function (e) {
@@ -16,11 +23,12 @@ $('document').ready( function () {
 
         var $inputParents = $(e.target).parents('.taskRow').children();
 
-        // Get input values
+        // Get input values, and store Start/Stop as Dates, Description as string, and Tags as array of strings
         savedObject.start = new Date( $inputParents.children('input:eq(0)').val() );
         savedObject.stop = new Date( $inputParents.children('input:eq(1)').val() );
         savedObject.description = $inputParents.children('input:eq(2)').val();
-        savedObject.tags = $inputParents.children('input:eq(3)').val();
+        // Remove white space, and repeated tags
+        savedObject.tags = _.uniq( $inputParents.children('input:eq(3)').val().replace(' ', '').split(',') );
 
         // Get the index relative to its .taskRow siblings
         var index = $(e.target).parents('.taskRow').index();
@@ -34,15 +42,15 @@ $('document').ready( function () {
         if ( $(e.target).parents('.taskRow').is(':last-child') ) {
             $(e.target).parents('tbody').append( taskRow.clone() );
             // Set default Start/Stop times to now
-            $('.taskRow:last td input:eq(0)').val( new Date().toString().slice(0,-18) );
-            $('.taskRow:last td input:eq(1)').val( new Date().toString().slice(0,-18) );
+            $('.taskRow:last td input:eq(0)').val( new Date().toString().slice(4,-18) );
+            $('.taskRow:last td input:eq(1)').val( new Date().toString().slice(4,-18) );
         }
 
         // Replace <input> fields with <span> elements containing input values
-        $inputParents.children('input:first').after('<span>' + savedObject.start.toString().slice(0,-18) + '</span>').remove();
-        $inputParents.children('input:first').after('<span>' + savedObject.stop.toString().slice(0,-18) + '</span>').remove();
+        $inputParents.children('input:first').after('<span>' + savedObject.start.toString().slice(4,-18) + '</span>').remove();
+        $inputParents.children('input:first').after('<span>' + savedObject.stop.toString().slice(4,-18) + '</span>').remove();
         $inputParents.children('input:first').after('<span>' + savedObject.description + '</span>').remove();
-        $inputParents.children('input:first').after('<span>' + savedObject.tags + '</span>').remove();
+        $inputParents.children('input:first').after('<span>' + savedObject.tags.join(', ') + '</span>').remove();
 
         // Hide Save button, and reveal Edit, Delete
         $(e.target).parents('.buttonTd').children('.btn-save').addClass('hidden');
@@ -71,8 +79,8 @@ $('document').ready( function () {
         $inputParents.children('span:first').after('<input type="text" name="tags">').remove();
 
         // use the index to pull the matching record from taskList data model, and enter into <input> fields
-        $inputParents.children('input:eq(0)').val( taskList[index].start.toString().slice(0,-18) )
-        $inputParents.children('input:eq(1)').val( taskList[index].stop.toString().slice(0,-18) )
+        $inputParents.children('input:eq(0)').val( taskList[index].start.toString().slice(4,-18) )
+        $inputParents.children('input:eq(1)').val( taskList[index].stop.toString().slice(4,-18) )
         $inputParents.children('input:eq(2)').val( taskList[index].description )
         $inputParents.children('input:eq(3)').val( taskList[index].tags )
 
@@ -80,8 +88,6 @@ $('document').ready( function () {
 
     // Delete button
     $('body').on('click', '.btn-delete', function (e) {
-
-        //var $inputParents = $(e.target).parents('.taskRow').children();
 
         // Get the index relative to its .taskRow siblings
         var index = $(e.target).parents('.taskRow').index();
@@ -94,5 +100,22 @@ $('document').ready( function () {
 
     });
 
+    //          #######################
+    //          ####  END BUTTONS  ####
+    //          #######################
+
+
+
+
+    function updateTagTally () {
+
+
+
+    }
+
+
 
 });
+
+
+
