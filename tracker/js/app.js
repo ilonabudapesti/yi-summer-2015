@@ -1,7 +1,12 @@
 $('document').ready( function () {
 
+    // Get a clean copy of the <tr> element for adding rows later 
     var taskRow = $('.taskRow').clone();
     
+    // Set default Start/Stop times to now
+    $('.taskRow:first td input:eq(0)').val( new Date().toString().slice(0,-18) );
+    $('.taskRow:first td input:eq(1)').val( new Date().toString().slice(0,-18) );
+
     var taskList = [];
 
     // Save button
@@ -12,8 +17,8 @@ $('document').ready( function () {
         var $inputParents = $(e.target).parents('.taskRow').children();
 
         // Get input values
-        savedObject.start = $inputParents.children('input:eq(0)').val();
-        savedObject.stop = $inputParents.children('input:eq(1)').val();
+        savedObject.start = new Date( $inputParents.children('input:eq(0)').val() );
+        savedObject.stop = new Date( $inputParents.children('input:eq(1)').val() );
         savedObject.description = $inputParents.children('input:eq(2)').val();
         savedObject.tags = $inputParents.children('input:eq(3)').val();
 
@@ -28,11 +33,14 @@ $('document').ready( function () {
         // If saving the last row, add a new empty row
         if ( $(e.target).parents('.taskRow').is(':last-child') ) {
             $(e.target).parents('tbody').append( taskRow.clone() );
+            // Set default Start/Stop times to now
+            $('.taskRow:last td input:eq(0)').val( new Date().toString().slice(0,-18) );
+            $('.taskRow:last td input:eq(1)').val( new Date().toString().slice(0,-18) );
         }
 
         // Replace <input> fields with <span> elements containing input values
-        $inputParents.children('input:first').after('<span>' + savedObject.start + '</span>').remove();
-        $inputParents.children('input:first').after('<span>' + savedObject.stop + '</span>').remove();
+        $inputParents.children('input:first').after('<span>' + savedObject.start.toString().slice(0,-18) + '</span>').remove();
+        $inputParents.children('input:first').after('<span>' + savedObject.stop.toString().slice(0,-18) + '</span>').remove();
         $inputParents.children('input:first').after('<span>' + savedObject.description + '</span>').remove();
         $inputParents.children('input:first').after('<span>' + savedObject.tags + '</span>').remove();
 
@@ -63,8 +71,8 @@ $('document').ready( function () {
         $inputParents.children('span:first').after('<input type="text" name="tags">').remove();
 
         // use the index to pull the matching record from taskList data model, and enter into <input> fields
-        $inputParents.children('input:eq(0)').val( taskList[index].start )
-        $inputParents.children('input:eq(1)').val( taskList[index].stop )
+        $inputParents.children('input:eq(0)').val( taskList[index].start.toString().slice(0,-18) )
+        $inputParents.children('input:eq(1)').val( taskList[index].stop.toString().slice(0,-18) )
         $inputParents.children('input:eq(2)').val( taskList[index].description )
         $inputParents.children('input:eq(3)').val( taskList[index].tags )
 
