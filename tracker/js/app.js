@@ -122,13 +122,22 @@ $('document').ready( function () {
             }
         }
 
-        return durations;
+        // Convert to an array of {name: tagName, duration: 30} objects, for easier sorting
+        var returnArray = [];
+        for (prop in durations) {
+            returnArray.push( { 'name': prop, 'duration': durations[prop] } )
+        }
+
+        // Sort by duration, low to high
+        returnArray = _(returnArray).sortBy('duration');
+
+        return returnArray;
     }
 
 
     function getDurationMinutes (start, stop) {
         return ( (stop / 1000) / 60 ) - ( (start / 1000) / 60 );
-    }
+    }    
 
     //          #######################
     //          #####  END TAGS  ######
