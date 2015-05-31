@@ -19,10 +19,11 @@
         <table id="trackerTable" class="center">
             <thead>
                 <tr>
-                    <th colspan="5">Activity Tracker</th>    
+                    <th colspan="6">Activity Tracker</th>    
                 </tr>
                 <tr>
-                    <th>Tags</th>
+                    <th class="wid-110">Tags</th>
+                    <th class="wid-110">Duration</th>
                     <th class="wid-110">Started</th>
                     <th class="wid-110">Stopped</th>
                     <th class="wid-180">Description</th>
@@ -31,17 +32,21 @@
             <tbody>
                 <tr class="taskRow">
                     <td>
-                        <input type="text" name="tags" placeholder="comma, separated">
-                    </td>
-                    <td class="startTd">
-                        <input class="wid-110" type="text" name="start">
-                    </td>
-                    <td class="stopTd">
-                        <input class="wid-110" type="text" name="stop">
+                        <input class="tagInput" type="text" name="tags" placeholder="comma, separated">
                     </td>
                     <td>
-                        <input class="wid-180" type="text" name="description">
+                        <span class="durationSpan"></span>
                     </td>
+                    <td class="startTd">
+                        <input class="startInput wid-110" type="text" name="start">
+                    </td>
+                    <td class="stopTd">
+                        <input class="stopInput wid-110" type="text" name="stop">
+                    </td>
+                    <td>
+                        <input class="descriptionInput wid-180" type="text" name="description">
+                    </td>
+
                     <td class="buttonTd">
                         <a class="btn btn-edit hidden">Edit</a>
                         <a class="btn btn-save">Save</a>

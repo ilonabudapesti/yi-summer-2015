@@ -12,8 +12,8 @@ $('document').ready( function () {
     $('.favoriteRow').remove();
     
     // Set default Start/Stop times to now
-    $('.taskRow:first td input:eq(1)').val( new Date().toString().slice(4,-18) );
-    $('.taskRow:first td input:eq(2)').val( new Date().toString().slice(4,-18) );
+    $('.startInput').val( new Date().toString().slice(4,-18) );
+    $('.stopInput').val( new Date().toString().slice(4,-18) );
 
 
     //          #######################
@@ -28,10 +28,10 @@ $('document').ready( function () {
         var $inputParents = $(e.target).parents('.taskRow').children();
 
         // Get input values, and store Start/Stop as Dates, Description as string, and Tags as array of strings
-        savedObject.tags = _.uniq( $inputParents.children('input:eq(0)').val().replace(' ', '').split(',') ); // Remove white space, and repeated tags
-        savedObject.start = new Date( $inputParents.children('input:eq(1)').val() );
-        savedObject.stop = new Date( $inputParents.children('input:eq(2)').val() );
-        savedObject.description = $inputParents.children('input:eq(3)').val();
+        savedObject.tags =    _.uniq( $inputParents.children('.tagInput').val().replace(' ', '').split(',') ); // Remove white space, and repeated tags
+        savedObject.start = new Date( $inputParents.children('.startInput').val() );
+        savedObject.stop =  new Date( $inputParents.children('.stopInput').val() );
+        savedObject.description =     $inputParents.children('.descriptionInput').val();
 
 
         // Get the index relative to its .taskRow siblings
@@ -46,15 +46,16 @@ $('document').ready( function () {
         if ( $(e.target).parents('.taskRow').is(':last-child') ) {
             $(e.target).parents('tbody').append( taskRow.clone() );
             // Set default Start/Stop times to now
-            $('.taskRow:last td input:eq(1)').val( new Date().toString().slice(4,-18) );
-            $('.taskRow:last td input:eq(2)').val( new Date().toString().slice(4,-18) );
+            $('.startInput').val( new Date().toString().slice(4,-18) );
+            $('.stopInput').val( new Date().toString().slice(4,-18) );
         }
 
         // Replace <input> fields with <span> elements containing input values
-        $inputParents.children('input:first').after('<span>' + savedObject.tags.join(', ') + '</span>').remove();
-        $inputParents.children('input:first').after('<span>' + savedObject.start.toString().slice(4,-18) + '</span>').remove();
-        $inputParents.children('input:first').after('<span>' + savedObject.stop.toString().slice(4,-18) + '</span>').remove();
-        $inputParents.children('input:first').after('<span>' + savedObject.description + '</span>').remove();
+        $inputParents.children('.tagInput').after('<span class="tagSpan">' + savedObject.tags.join(', ') + '</span>').remove();
+        $inputParents.children('.durationSpan').html( getDurationMinutes( savedObject.start, savedObject.stop ) + ' minutes');
+        $inputParents.children('.startInput').after('<span class="startSpan">' + savedObject.start.toString().slice(4,-18) + '</span>').remove();
+        $inputParents.children('.stopInput').after('<span class="stopSpan">' + savedObject.stop.toString().slice(4,-18) + '</span>').remove();
+        $inputParents.children('.descriptionInput').after('<span class="descriptionSpan">' + savedObject.description + '</span>').remove();
 
         // Hide Save button, and reveal Edit, Delete
         $(e.target).parents('.buttonTd').children('.btn-save').addClass('hidden');
@@ -79,16 +80,17 @@ $('document').ready( function () {
         var index = $(e.target).parents('.taskRow').index();
 
         // Replace <span> elements with <input> fields
-        $inputParents.children('span:first').after('<input type="text" name="tags">').remove();
-        $inputParents.children('span:first').after('<input class="wid-110" type="text" name="start">').remove();
-        $inputParents.children('span:first').after('<input class="wid-110" type="text" name="stop">').remove();
-        $inputParents.children('span:first').after('<input class="wid-180" type="text" name="description">').remove();
+        $inputParents.children('.tagSpan').after('<input class="tagInput" type="text" name="tags">').remove();
+        $inputParents.children('.startSpan').after('<input class="startInput wid-110" type="text" name="start">').remove();
+        $inputParents.children('.stopSpan').after('<input class="stopInput wid-110" type="text" name="stop">').remove();
+        $inputParents.children('.descriptionSpan').after('<input class="descriptionInput wid-180" type="text" name="description">').remove();
 
         // use the index to pull the matching record from taskList data model, and enter into <input> fields
-        $inputParents.children('input:eq(0)').val( taskList[index].tags )
-        $inputParents.children('input:eq(1)').val( taskList[index].start.toString().slice(4,-18) )
-        $inputParents.children('input:eq(2)').val( taskList[index].stop.toString().slice(4,-18) )
-        $inputParents.children('input:eq(3)').val( taskList[index].description )
+        $inputParents.children('.tagInput').val( taskList[index].tags );
+        $inputParents.children('.durationSpan').html( getDurationMinutes(taskList[index].start, taskList[index].stop ) + ' minutes' );
+        $inputParents.children('.startInput').val( taskList[index].start.toString().slice(4,-18) );
+        $inputParents.children('.stopInput').val( taskList[index].stop.toString().slice(4,-18) );
+        $inputParents.children('.descriptionInput').val( taskList[index].description );
         
 
     });
@@ -141,11 +143,12 @@ $('document').ready( function () {
         return returnArray;
     }
 
-
+    // Take two native Date objects and return the duration in minutes
     function getDurationMinutes (start, stop) {
         return ( (stop / 1000) / 60 ) - ( (start / 1000) / 60 );
     }    
 
+    // Update the Favorite Activities table
     function updateFavoriteActivities (tagDurations) {
         $('#favoriteActivitiesTable').children('tbody').children('.favoriteRow').remove();
 
@@ -154,7 +157,7 @@ $('document').ready( function () {
             $('#favoriteActivitiesTable').children('tbody').append( favoriteRow.clone() );
             $('.favoriteRow:last').children('td').remove()
             $('.favoriteRow:last').append('<td><span>' + tagDurations[i].name + '</span></td>');
-            $('.favoriteRow:last').append('<td><span>' + tagDurations[i].duration + '</span></td>');
+            $('.favoriteRow:last').append('<td><span>' + tagDurations[i].duration + ' minutes' + '</span></td>');
 
         }
     }

@@ -12,23 +12,28 @@
 
 .wid-70 {
   width: 70px;
+  max-width: 70px;
 }
 
 .wid-110 {
     width: 110px;
+    max-width: 110px;
 }
 
 .wid-180 {
     width: 180px;
+    max-width: 180px
 }
 
 body {
     width: 80%;
+
 }
 
 header {
     height: 70px;
     background-color: #DDDDDD;
+    min-width: 850px;
 }
 
 nav {
@@ -39,6 +44,7 @@ nav {
 section {
     padding: 25px;
     background-color: #EFEFEF;
+    min-width: 800px;
 }
 
 span {
@@ -63,6 +69,7 @@ span {
 
 footer {
     background-color: #DDDDDD;
+    min-width: 850px;
 }
 
 h4 {
