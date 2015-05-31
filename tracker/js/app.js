@@ -6,10 +6,15 @@ $('document').ready( function () {
 
     // Get a clean copy of the <tr> elements for adding rows later 
     var taskRow = $('.taskRow').clone();
-    var favoriteRow = $('.favoriteRow').clone();
 
-    // Remove all rows from Favorite Activities table until some tags have been created
+    var favoriteRow = $('.favoriteRow').clone();
+    var perDayRow = $('.perDayRow').clone();
+    var perMonthRow = $('.perMonthRow').clone();
+
+    // Remove all rows from bottom tables until some tags have been created
     $('.favoriteRow').remove();
+    $('.perDayRow').remove();
+    $('.perMonthRow').remove();
     
     // Set default Start/Stop times to now
     $('.startInput').val( new Date().toString().slice(4,-18) );
@@ -34,6 +39,7 @@ $('document').ready( function () {
         savedObject.description =     $inputParents.children('.descriptionInput').val();
         savedObject.day =   savedObject.start.getDate();
         savedObject.month = savedObject.start.getMonth() + 1;
+        savedObject.duration = getDurationMinutes(savedObject.start, savedObject.stop);
 
 
         // Get the index relative to its .taskRow siblings
@@ -64,8 +70,11 @@ $('document').ready( function () {
         $(e.target).parents('.buttonTd').children('.btn-edit').removeClass('hidden');
         $(e.target).parents('.buttonTd').children('.btn-delete').removeClass('hidden');
 
-        // Get new tag durations and update Favorite Activities table
-        updateFavoriteActivities( getTagDurations() );
+        // Get new tag durations and update tally tables
+        var currentDurations = getTagDurations();
+
+        updateFavoriteActivitiesTable( currentDurations );
+        updatePerDayTable( taskList );
 
     });
 
@@ -109,6 +118,12 @@ $('document').ready( function () {
         // Remove data
         taskList.splice(index, 1);
 
+        // Get new tag durations and update tally tables
+        var currentDurations = getTagDurations();
+
+        updateFavoriteActivitiesTable( currentDurations );
+        updatePerDayTable( taskList );
+
     });
 
     //          #######################
@@ -151,7 +166,7 @@ $('document').ready( function () {
     }    
 
     // Update the Favorite Activities table
-    function updateFavoriteActivities (tagDurations) {
+    function updateFavoriteActivitiesTable (tagDurations) {
         $('#favoriteActivitiesTable').children('tbody').children('.favoriteRow').remove();
 
         for (var i = tagDurations.length - 1; i >= 0; i--) {
@@ -161,6 +176,34 @@ $('document').ready( function () {
             $('.favoriteRow:last').append('<td><span>' + tagDurations[i].duration + ' minutes' + '</span></td>');
 
         }
+    }
+
+    function updatePerDayTable (taskList) {
+        $('#perDayTable').children('tbody').children('.perDayRow').remove();
+
+        var groupedByDay = _(taskList).groupBy('day');
+
+        var summed = []; 
+        for (var prop in groupedByDay) {
+            var sum = 0; // initialize 
+            for (var i = 0; i < groupedByDay[prop].length; i++) {
+                sum += groupedByDay[prop][i].duration;
+            }
+            summed.push( {'date': prop, 'summedDuration': sum } );
+        }
+
+        for (var i = 0; i < summed.length; i++){
+            $('#perDayTable').children('tbody').append( perDayRow.clone() );
+            $('.perDayRow:last').children('td').remove()
+            $('.perDayRow:last').append('<td><span>' + summed[i].date + '</span></td>');
+            $('.perDayRow:last').append('<td><span>' + summed[i].summedDuration + ' minutes' + '</span></td>'); 
+        }
+        
+
+    }
+
+    function updateThisMonthTable (tagDurations) {
+        
     }
 
 
