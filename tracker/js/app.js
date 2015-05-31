@@ -4,8 +4,12 @@ $('document').ready( function () {
 
 
 
-    // Get a clean copy of the <tr> element for adding rows later 
+    // Get a clean copy of the <tr> elements for adding rows later 
     var taskRow = $('.taskRow').clone();
+    var favoriteRow = $('.favoriteRow').clone();
+
+    // Remove all rows from Favorite Activities table until some tags have been created
+    $('.favoriteRow').remove();
     
     // Set default Start/Stop times to now
     $('.taskRow:first td input:eq(0)').val( new Date().toString().slice(4,-18) );
@@ -57,6 +61,8 @@ $('document').ready( function () {
         $(e.target).parents('.buttonTd').children('.btn-edit').removeClass('hidden');
         $(e.target).parents('.buttonTd').children('.btn-delete').removeClass('hidden');
 
+        // Get new tag durations and update Favorite Activities table
+        updateFavoriteActivities( getTagDurations() );
 
     });
 
@@ -138,6 +144,19 @@ $('document').ready( function () {
     function getDurationMinutes (start, stop) {
         return ( (stop / 1000) / 60 ) - ( (start / 1000) / 60 );
     }    
+
+    function updateFavoriteActivities (tagDurations) {
+        $('#favoriteActivitiesTable').children('tbody').children('.favoriteRow').remove();
+
+        for (var i = tagDurations.length - 1; i >= 0; i--) {
+            console.log(tagDurations[i].name, tagDurations[i].duration)
+            $('#favoriteActivitiesTable').children('tbody').append( favoriteRow.clone() );
+            $('.favoriteRow:last').children('td').remove()
+            $('.favoriteRow:last').append('<td><span>' + tagDurations[i].name + '</span></td>');
+            $('.favoriteRow:last').append('<td><span>' + tagDurations[i].duration + '</span></td>');
+
+        }
+    }
 
     //          #######################
     //          #####  END TAGS  ######
