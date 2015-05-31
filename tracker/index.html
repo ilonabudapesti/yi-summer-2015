@@ -22,15 +22,17 @@
                     <th colspan="5">Activity Tracker</th>    
                 </tr>
                 <tr>
+                    <th>Tags</th>
                     <th>Started</th>
                     <th>Stopped</th>
                     <th>Description</th>
-                    <th>Tags</th>
- 
                 </tr>
             </thead>
             <tbody>
                 <tr class="taskRow">
+                    <td>
+                        <input type="text" name="tags" placeholder="comma, separated">
+                    </td>
                     <td>
                         <input type="text" name="start">
                     </td>
@@ -39,9 +41,6 @@
                     </td>
                     <td>
                         <input type="text" name="description">
-                    </td>
-                    <td>
-                        <input type="text" name="tags" placeholder="comma, separated">
                     </td>
                     <td class="buttonTd">
                         <a class="btn btn-edit hidden">Edit</a>
