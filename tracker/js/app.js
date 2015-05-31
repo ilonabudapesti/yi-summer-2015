@@ -1,8 +1,8 @@
-
+var taskList = [];
 
 $('document').ready( function () {
 
-    var taskList = [];
+
 
     // Get a clean copy of the <tr> element for adding rows later 
     var taskRow = $('.taskRow').clone();
@@ -104,15 +104,35 @@ $('document').ready( function () {
     //          ####  END BUTTONS  ####
     //          #######################
 
+    //          #######################
+    //          ####  BEGIN TAGS  #####
+    //          #######################
 
 
+    function getTagDurations () {
 
-    function updateTagTally () {
+        var durations = {};
 
+        for (var i = 0; i < taskList.length; i++) {
+            var currentDuration = getDurationMinutes( taskList[i].start, taskList[i].stop );
+            for (var j = 0; j < taskList[i].tags.length; j++) {
+                var currentTagName = taskList[i].tags[j];
+                // Set key:val of durations object to tag:duration, and increment duration value on subsequent iterations
+                durations[currentTagName] = durations[currentTagName] ? (durations[currentTagName] + currentDuration) : currentDuration ;
+            }
+        }
 
-
+        return durations;
     }
 
+
+    function getDurationMinutes (start, stop) {
+        return ( (stop / 1000) / 60 ) - ( (start / 1000) / 60 );
+    }
+
+    //          #######################
+    //          #####  END TAGS  ######
+    //          #######################
 
 
 });
