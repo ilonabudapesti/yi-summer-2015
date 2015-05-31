@@ -10,6 +10,18 @@
     visibility: hidden; 
 }
 
+.wid-70 {
+  width: 70px;
+}
+
+.wid-110 {
+    width: 110px;
+}
+
+.wid-180 {
+    width: 180px;
+}
+
 body {
     width: 80%;
 }
@@ -29,6 +41,14 @@ section {
     background-color: #EFEFEF;
 }
 
+span {
+    font-size: .9em;
+}
+
+#favoriteActivitiesTable tbody td {
+  padding: 5px;
+}
+
 #trackerSection table, td, tr, thead, th {
     border: 1px solid #11D;
     border-spacing: 10px;   
@@ -36,15 +56,9 @@ section {
     /* border-collapse: collapse; */
 }
 
-#trackerSection td, th, span {
+#trackerSection td, th {
     padding: 8px;
-    width: 180px;
-    max-width: 180px;
     overflow: scroll;
-}
-
-input {
-    width: 180px;
 }
 
 footer {
@@ -59,28 +73,28 @@ h4 {
 
 /* http://css3buttongenerator.com/ */
 .btn {
-  background: #488ebd;
-  background-image: -webkit-linear-gradient(top, #488ebd, #6a9dbd);
-  background-image: -moz-linear-gradient(top, #488ebd, #6a9dbd);
-  background-image: -ms-linear-gradient(top, #488ebd, #6a9dbd);
-  background-image: -o-linear-gradient(top, #488ebd, #6a9dbd);
-  background-image: linear-gradient(to bottom, #488ebd, #6a9dbd);
-  -webkit-border-radius: 8;
-  -moz-border-radius: 8;
-  border-radius: 8px;
-  font-family: Arial;
-  color: #ffffff;
-  font-size: 15px;
-  padding: 5px 10px 5px 10px;
-  text-decoration: none;
+    background: #488ebd;
+    background-image: -webkit-linear-gradient(top, #488ebd, #6a9dbd);
+    background-image: -moz-linear-gradient(top, #488ebd, #6a9dbd);
+    background-image: -ms-linear-gradient(top, #488ebd, #6a9dbd);
+    background-image: -o-linear-gradient(top, #488ebd, #6a9dbd);
+    background-image: linear-gradient(to bottom, #488ebd, #6a9dbd);
+    -webkit-border-radius: 8;
+    -moz-border-radius: 8;
+    border-radius: 8px;
+    font-family: Arial;
+    color: #ffffff;
+    font-size: 15px;
+    padding: 5px 10px 5px 10px;
+    text-decoration: none;
 }
 
 .btn:hover {
-  background: #3cb0fd;
-  background-image: -webkit-linear-gradient(top, #3cb0fd, #3498db);
-  background-image: -moz-linear-gradient(top, #3cb0fd, #3498db);
-  background-image: -ms-linear-gradient(top, #3cb0fd, #3498db);
-  background-image: -o-linear-gradient(top, #3cb0fd, #3498db);
-  background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
-  text-decoration: none;
+    background: #3cb0fd;
+    background-image: -webkit-linear-gradient(top, #3cb0fd, #3498db);
+    background-image: -moz-linear-gradient(top, #3cb0fd, #3498db);
+    background-image: -ms-linear-gradient(top, #3cb0fd, #3498db);
+    background-image: -o-linear-gradient(top, #3cb0fd, #3498db);
+    background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
+    text-decoration: none;
 }

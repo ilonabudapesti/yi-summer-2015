@@ -80,9 +80,9 @@ $('document').ready( function () {
 
         // Replace <span> elements with <input> fields
         $inputParents.children('span:first').after('<input type="text" name="tags">').remove();
-        $inputParents.children('span:first').after('<input type="text" name="start">').remove();
-        $inputParents.children('span:first').after('<input type="text" name="stop">').remove();
-        $inputParents.children('span:first').after('<input type="text" name="description">').remove();
+        $inputParents.children('span:first').after('<input class="wid-110" type="text" name="start">').remove();
+        $inputParents.children('span:first').after('<input class="wid-110" type="text" name="stop">').remove();
+        $inputParents.children('span:first').after('<input class="wid-180" type="text" name="description">').remove();
 
         // use the index to pull the matching record from taskList data model, and enter into <input> fields
         $inputParents.children('input:eq(0)').val( taskList[index].tags )
