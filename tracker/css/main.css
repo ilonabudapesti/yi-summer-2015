@@ -51,6 +51,12 @@ span {
     font-size: .9em;
 }
 
+#perDayTable, #favoriteActivitiesTable, #perMonthTable {
+  display: inline-block;
+  margin-right: 50px ; 
+  margin-left: 50px ;
+}
+
 #favoriteActivitiesTable tbody td {
   padding: 5px;
 }

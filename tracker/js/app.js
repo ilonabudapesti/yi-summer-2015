@@ -32,6 +32,8 @@ $('document').ready( function () {
         savedObject.start = new Date( $inputParents.children('.startInput').val() );
         savedObject.stop =  new Date( $inputParents.children('.stopInput').val() );
         savedObject.description =     $inputParents.children('.descriptionInput').val();
+        savedObject.day =   savedObject.start.getDate();
+        savedObject.month = savedObject.start.getMonth() + 1;
 
 
         // Get the index relative to its .taskRow siblings
@@ -153,7 +155,6 @@ $('document').ready( function () {
         $('#favoriteActivitiesTable').children('tbody').children('.favoriteRow').remove();
 
         for (var i = tagDurations.length - 1; i >= 0; i--) {
-            console.log(tagDurations[i].name, tagDurations[i].duration)
             $('#favoriteActivitiesTable').children('tbody').append( favoriteRow.clone() );
             $('.favoriteRow:last').children('td').remove()
             $('.favoriteRow:last').append('<td><span>' + tagDurations[i].name + '</span></td>');
@@ -161,6 +162,7 @@ $('document').ready( function () {
 
         }
     }
+
 
     //          #######################
     //          #####  END TAGS  ######
