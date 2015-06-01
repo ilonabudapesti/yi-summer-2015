@@ -55,6 +55,7 @@ span {
   display: inline-block;
   margin-right: 50px ; 
   margin-left: 50px ;
+  vertical-align: top;
 }
 
 #favoriteActivitiesTable tbody td {
@@ -76,6 +77,7 @@ span {
 footer {
     background-color: #DDDDDD;
     min-width: 850px;
+    padding: 25px;
 }
 
 h4 {
