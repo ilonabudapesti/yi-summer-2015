@@ -22,7 +22,7 @@ $('document').ready( function () {
 
 
     //          #######################
-    //          #### BEGIN BUTTONS ####
+    //----------#### BEGIN BUTTONS ####----(Begin Section)---------------------------------------------------
     //          #######################
 
     // Save button
@@ -127,13 +127,16 @@ $('document').ready( function () {
     });
 
     //          #######################
-    //          ####  END BUTTONS  ####
+    //----------####  END BUTTONS  ####----(End Section)-----------------------------------------------------
     //          #######################
 
     //          #######################
-    //          ####  BEGIN TAGS  #####
+    //----------# BEGIN FOOTER TABLES #----(Begin Section)---------------------------------------------------
     //          #######################
-
+    //
+    //                  - # - # - # - # - #
+    //                  #   BEGIN TAGS    -     (Begin Subsection)
+    //                  - # - # - # - # - #
 
     function getTagDurations () {
 
@@ -178,11 +181,18 @@ $('document').ready( function () {
         }
     }
 
+    //                  - # - # - # - # - #
+    //                  #    END TAGS     -     (End Subsection)
+    //                  - # - # - # - # - #
+
+    // Get data for and update the "Total Time Per Day" table
     function updatePerDayTable (taskList) {
         $('#perDayTable').children('tbody').children('.perDayRow').remove();
 
+        // Group by day of month
         var groupedByDay = _(taskList).groupBy('day');
 
+        // Sum duration of all activities on each day
         var summed = []; 
         for (var prop in groupedByDay) {
             var sum = 0; // initialize 
@@ -192,23 +202,22 @@ $('document').ready( function () {
             summed.push( {'date': prop, 'summedDuration': sum } );
         }
 
+        // Update the Total Time Per Day table
         for (var i = 0; i < summed.length; i++){
             $('#perDayTable').children('tbody').append( perDayRow.clone() );
             $('.perDayRow:last').children('td').remove()
             $('.perDayRow:last').append('<td><span>' + summed[i].date + '</span></td>');
             $('.perDayRow:last').append('<td><span>' + summed[i].summedDuration + ' minutes' + '</span></td>'); 
         }
-        
-
     }
 
+    // Get data for and update the "Total Time This Month" table
     function updateThisMonthTable (tagDurations) {
-        
-    }
 
+    }
 
     //          #######################
-    //          #####  END TAGS  ######
+    //          ## END FOOTER TABLES ##----(End Section)-----------------------------------------------------
     //          #######################
 
 
