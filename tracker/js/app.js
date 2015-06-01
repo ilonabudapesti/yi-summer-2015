@@ -1,12 +1,14 @@
+// Outside of document.ready for console access and easy testing/debugging
 var taskList = [];
 
 $('document').ready( function () {
 
-
+    //          #######################
+    //----------####  BEGIN SETUP  ####----(Begin Section)---------------------------------------------------
+    //          #######################
 
     // Get a clean copy of the <tr> elements for adding rows later 
     var taskRow = $('.taskRow').clone();
-
     var favoriteRow = $('.favoriteRow').clone();
     var perDayRow = $('.perDayRow').clone();
     var perMonthRow = $('.perMonthRow').clone();
@@ -22,12 +24,17 @@ $('document').ready( function () {
 
 
     //          #######################
+    //----------#####  END SETUP  #####----(End Section)---------------------------------------------------
+    //          #######################
+
+    //          #######################
     //----------#### BEGIN BUTTONS ####----(Begin Section)---------------------------------------------------
     //          #######################
 
     // Save button
     $('body').on('click', '.btn-save', function (e) {
         
+        // These will be stored in the array taskList
         var savedObject = {};
 
         var $inputParents = $(e.target).parents('.taskRow').children();
@@ -41,14 +48,15 @@ $('document').ready( function () {
         savedObject.month = savedObject.start.getMonth() + 1;
         savedObject.duration = getDurationMinutes(savedObject.start, savedObject.stop);
 
-
         // Get the index relative to its .taskRow siblings
         var index = $(e.target).parents('.taskRow').index();
 
+        // Insert a non-referenced clone of savedObject into taskList array
         taskList[ index ] = _.clone( savedObject );
 
-        console.log(savedObject);
-        console.log(taskList);
+        // Simple logs for viewing and making sure data is saving properly
+        console.log("Just saved: ", savedObject);
+        console.log("taskList now contains: ", taskList);
 
         // If saving the last row, add a new empty row
         if ( $(e.target).parents('.taskRow').is(':last-child') ) {
@@ -58,7 +66,7 @@ $('document').ready( function () {
             $('.stopInput').val( new Date().toString().slice(4,-18) );
         }
 
-        // Replace <input> fields with <span> elements containing input values
+        // Replace <input> fields with <span> elements containing the user's input values
         $inputParents.children('.tagInput').after('<span class="tagSpan">' + savedObject.tags.join(', ') + '</span>').remove();
         $inputParents.children('.durationSpan').html( getDurationMinutes( savedObject.start, savedObject.stop ) + ' minutes');
         $inputParents.children('.startInput').after('<span class="startSpan">' + savedObject.start.toString().slice(4,-18) + '</span>').remove();
@@ -72,7 +80,6 @@ $('document').ready( function () {
 
         // Get new tag durations and update tally tables
         var currentDurations = getTagDurations();
-
         updateFavoriteActivitiesTable( currentDurations );
         updatePerDayTable( taskList );
         updateThisMonthTable( taskList );
@@ -121,7 +128,6 @@ $('document').ready( function () {
 
         // Get new tag durations and update tally tables
         var currentDurations = getTagDurations();
-
         updateFavoriteActivitiesTable( currentDurations );
         updatePerDayTable( taskList );
         updateThisMonthTable( taskList );
@@ -197,18 +203,19 @@ $('document').ready( function () {
         // Sum duration of all activities on each day
         var summed = []; 
         for (var prop in groupedByDay) {
-            var sum = 0; // initialize 
+            var sum = 0; // initialize or reset
+            var month = groupedByDay[prop][0].month;
             for (var i = 0; i < groupedByDay[prop].length; i++) {
                 sum += groupedByDay[prop][i].duration;
             }
-            summed.push( {'date': prop, 'summedDuration': sum } );
+            summed.push( { 'month': month, 'date': prop, 'summedDuration': sum } );
         }
 
         // Update the Total Time Per Day table
         for (var i = 0; i < summed.length; i++){
             $('#perDayTable').children('tbody').append( perDayRow.clone() );
             $('.perDayRow:last').children('td').remove()
-            $('.perDayRow:last').append('<td><span>' + summed[i].date + '</span></td>');
+            $('.perDayRow:last').append('<td><span>' + summed[i].month + '/' + summed[i].date + '</span></td>');
             $('.perDayRow:last').append('<td><span>' + summed[i].summedDuration + ' minutes' + '</span></td>'); 
         }
     }
@@ -228,12 +235,16 @@ $('document').ready( function () {
         // Remove old row
         $('#perMonthTable').children('tbody').children('.perMonthRow').remove();
 
-        // Add new row with updated Total Time This Month
-        $('#perMonthTable').children('tbody').append( perMonthRow.clone() );
-        $('.perMonthRow:last').children('td').remove()
-        $('.perMonthRow:last').append('<td><span>' + summedMonthDuration + ' minutes' +'</span></td>');
-    }
+        // Don't display anything if 0 duration
+        if ( summedMonthDuration !== 0 ) {
+            // Add new row with updated Total Time This Month
+            $('#perMonthTable').children('tbody').append( perMonthRow.clone() );
+            $('.perMonthRow:last').children('td').html('<span>' + summedMonthDuration + ' minutes' +'</span>');
+        }
 
+
+    }
+        
     //          #######################
     //----------## END FOOTER TABLES ##----(End Section)-----------------------------------------------------
     //          #######################

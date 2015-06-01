@@ -36,10 +36,6 @@ header {
     min-width: 850px;
 }
 
-nav {
-    height: 20px;
-    background-color: #DDDEEE
-}
 
 section {
     padding: 25px;
@@ -80,7 +76,11 @@ footer {
     padding: 25px;
 }
 
-h4 {
+footer td {
+  padding: 3px;
+}
+
+h4, h5{
     margin: 0px;
     padding: 10px;
 }
