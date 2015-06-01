@@ -75,6 +75,7 @@ $('document').ready( function () {
 
         updateFavoriteActivitiesTable( currentDurations );
         updatePerDayTable( taskList );
+        updateThisMonthTable( taskList );
 
     });
 
@@ -123,6 +124,7 @@ $('document').ready( function () {
 
         updateFavoriteActivitiesTable( currentDurations );
         updatePerDayTable( taskList );
+        updateThisMonthTable( taskList );
 
     });
 
@@ -160,7 +162,7 @@ $('document').ready( function () {
         // Sort by duration, low to high
         returnArray = _(returnArray).sortBy('duration');
 
-        return returnArray;
+        return returnArray; //
     }
 
     // Take two native Date objects and return the duration in minutes
@@ -212,12 +214,28 @@ $('document').ready( function () {
     }
 
     // Get data for and update the "Total Time This Month" table
-    function updateThisMonthTable (tagDurations) {
+    function updateThisMonthTable (taskList) {
 
+        // Get current month
+        var currentMonth = new Date().getMonth() + 1;
+
+        // Filter only tasks in current month, and reduce to get summed duration
+        var summedMonthDuration = _(taskList).chain()
+                                     .filter( function (obj) {return obj.month === currentMonth} )
+                                     .reduce( function(memo, val) {return memo + val.duration} , 0 )
+                                     .value();
+
+        // Remove old row
+        $('#perMonthTable').children('tbody').children('.perMonthRow').remove();
+
+        // Add new row with updated Total Time This Month
+        $('#perMonthTable').children('tbody').append( perMonthRow.clone() );
+        $('.perMonthRow:last').children('td').remove()
+        $('.perMonthRow:last').append('<td><span>' + summedMonthDuration + ' minutes' +'</span></td>');
     }
 
     //          #######################
-    //          ## END FOOTER TABLES ##----(End Section)-----------------------------------------------------
+    //----------## END FOOTER TABLES ##----(End Section)-----------------------------------------------------
     //          #######################
 
 
