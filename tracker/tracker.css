@@ -1,0 +1,52 @@
+@import url(http://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700);
+table {
+    font-family: 'Ubuntu Mono';
+}
+
+td {
+    text-align: center;
+    background-color: #666;
+    color: #00CC00;
+    font-weight: bold;
+}
+
+h1 {
+    font-family: 'Ubuntu Mono';
+}
+
+p {
+    font-family: 'Ubuntu Mono';
+    font-weight: 700;
+}
+
+.save {
+    font-family: 'Ubuntu Mono';
+    font-weight: bold;
+    background-color: #00cc00;
+    color: #000;
+}
+
+.save:hover {
+    background-color: #66e066;
+}
+
+.edit {
+    font-family: 'Ubuntu Mono';
+    font-weight: bold;
+    color: #00cc00;
+}
+
+.edit:hover {
+    background-color: #ccc;
+}
+
+.delete {
+    font-family: 'Ubuntu Mono';
+    font-weight: bold;
+    color: #00cc00;
+}
+
+.delete:hover {
+    background-color: #cc0000;
+    color: #fff;
+}

@@ -1,0 +1,36 @@
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="tracker.css">
+    <script type="text/javascript" src="tracker.js"></script>
+</head>
+
+<body>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <p>Faraji's Workout Tracker</p>
+        </div>
+        <div class="table-responsive">
+            <table id="myTable" class="table table-bordered">
+                <thead>
+                    <h1>Daily Workout Results</h1></thead>
+                <tbody>
+                    <tr>
+                        <td>Start Time</td>
+                        <td>End Time</td>
+                        <td>Energy Level (1-4)</td>
+                        <td>Breakfast? Y/N</td>
+                    </tr>
+                    <tr id="originalRow">
+                        <td><input type="text" id="start"></td>
+                        <td><input type="text" id="end"></td>
+                        <td><input type="text" id="energy"></td>
+                        <td><input type="text" id="breakfast"></td>
+                        <td><button class="btn btn-default save" type="button" onclick="cloneRow();">Save</button>
+                            <button class="btn btn-default edit" type="button">Edit</button>
+                            <button class="btn btn-default delete" type="button" onclick="deleteRow(this)">Delete</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div><!-- table-responsive -->
+    </div><!-- panel panel-default -->
+</body>
