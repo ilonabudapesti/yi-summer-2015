@@ -50,7 +50,7 @@ var removeEntry = function(element) {
 		return entry.id !== removeID;
 	});
 	
-	updateEntries();
+	$(element).closest('tr').hide(500);
 }
 
 var updateEntries = function() {
@@ -162,28 +162,34 @@ var buildStats = function() {
 
 	//Empty By Day table rows
 	$('#statsByDayRows').empty();
+	$('#statsByDayRows').css("display","none");
 	//Rebuild the By Day table from the statsByDay object
 	$.each(statsByDay, function(key,value) {
 		$('#statsByDayRows').append('<tr><td>' 
 			+ key + '</td><td>' 
 			+ value + '</td></tr>');
 	});
+	$('#statsByDayRows').show(500);
 
 	//Empty By Month table rows
 	$('#statsByMonthRows').empty();
+	$('#statsByMonthRows').css("display","none");
 	//Rebuild the By Month table from the statsByMonth object
 	$.each(statsByMonth, function(key,value) {
 		$('#statsByMonthRows').append('<tr><td>' 
 			+ key + '</td><td>' 
 			+ value + '</td></tr>');
 	});
+	$('#statsByMonthRows').show(500);
 
 	//Empty By Tag table rows
 	$('#statsByTagRows').empty();
+	$('#statsByTagRows').css("display","none");
 	//Rebuild the By Month table from the statsByMonth object
 	$.each(statsByTag, function(key,value) {
 		$('#statsByTagRows').append('<tr><td>' 
 			+ key + '</td><td>' 
 			+ value + '</td></tr>');
 	});
+	$('#statsByTagRows').show(500);
 }
