@@ -11,6 +11,10 @@ function Entry(start, end, description, tags)
 	this.end = moment(end);
 	this.description = description;
 	this.tags = tags.split(',');
+	for(var i in this.tags)
+	{ 
+		this.tags[i] = this.tags[i].trim(); 
+	}
 	
 	this.duration = Math.floor( Math.abs(this.end - this.start) / 60000 ); //convert to minutes
 	this.id = ++entryID;
