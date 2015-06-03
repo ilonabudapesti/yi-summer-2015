@@ -24,6 +24,7 @@ p {
     font-weight: bold;
     background-color: #00cc00;
     color: #000;
+    margin: 5px;
 }
 
 .save:hover {
@@ -34,6 +35,7 @@ p {
     font-family: 'Ubuntu Mono';
     font-weight: bold;
     color: #00cc00;
+    margin: 5px;
 }
 
 .edit:hover {
@@ -44,6 +46,7 @@ p {
     font-family: 'Ubuntu Mono';
     font-weight: bold;
     color: #00cc00;
+    margin: 5px;
 }
 
 .delete:hover {
