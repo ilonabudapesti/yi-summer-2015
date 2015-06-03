@@ -1,5 +1,6 @@
 var allEntries = [];
 var entryID = 0;
+var currentUser = 0; //represents an anonymous user
 
 var currentDateString = moment().format('YYYY-MM-DDTHH:mm');
 $('#inputStart').val(currentDateString);
@@ -18,6 +19,7 @@ function Entry(start, end, description, tags)
 	
 	this.duration = Math.floor( Math.abs(this.end - this.start) / 60000 ); //convert to minutes
 	this.id = ++entryID;
+	this.user = currentUser;
 }
 
 var addEntry = function() {

@@ -41,6 +41,7 @@
               <input type="password" placeholder="Password" class="form-control">
             </div>
             <button type="submit" class="btn btn-success">Sign in</button>
+            &nbsp;&nbsp;&nbsp;<button type="button" class="btn btn-info" data-toggle="modal" data-target="#modalRegister">Register</button>
           </form>
         </div><!--/.navbar-collapse -->
       </div>
@@ -200,6 +201,38 @@
 		      <div class="modal-footer">
 		        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 		        <button id="editSaveButton" type="button" class="btn btn-primary" data-dismiss="modal">Save changes</button>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+
+		<!-- Modal window for user registration -->
+		<div class="modal fade" id="modalRegister" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		  <div class="modal-dialog">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		        <h4 class="modal-title" id="myModalLabel">Create an Account</h4>
+		      </div>
+		      <div class="modal-body">
+		      	  	<form>
+					  <div class="form-group">
+					    <label for="userInputName">First Name</label>
+					    <input type="text" class="form-control" id="userInputName" placeholder="First Name">
+					  </div>
+					  <div class="form-group">
+					    <label for="userInputEmail">Email address</label>
+					    <input type="email" class="form-control" id="userInputEmail" placeholder="Email">
+					  </div>
+					  <div class="form-group">
+					    <label for="userInputPassword">Password</label>
+					    <input type="password" class="form-control" id="userInputPassword" placeholder="Password">
+					  </div>
+					</form>
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+		        <button id="editSaveButton" type="button" class="btn btn-primary" data-dismiss="modal">Submit</button>
 		      </div>
 		    </div>
 		  </div>
