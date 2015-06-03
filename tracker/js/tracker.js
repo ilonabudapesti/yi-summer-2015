@@ -6,6 +6,13 @@ var currentDateString = moment().format('YYYY-MM-DDTHH:mm');
 $('#inputStart').val(currentDateString);
 $('#inputEnd').val(currentDateString);
 
+function User(name, email, password)
+{
+	this.name = name;
+	this.email = email.toLowerCase();
+	this.password = password;
+}
+
 function Entry(start, end, description, tags)
 {
 	this.start = moment(start);
