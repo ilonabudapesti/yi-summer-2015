@@ -24,4 +24,27 @@ for (var key in profileAnimal) {
 		}
 };	
 
-// Part 1a Animal Relationship Data
+// Part 1a: Animal Relationship Data
+console.log(profileAnimal.relationships.friends);
+console.log(profileAnimal.relationships.matches);
+profileAnimal.relationships.friends['duck'] = undefined;
+
+// Part 2a: Log the Animals in a List
+for (i=0; i<animals.length; i++) {
+	console.log(animals[i].species + ": " + animals[i].tagline)
+};
+
+// Part 2a: Log the Animals in a List + numbered list
+
+for (i=0; i<animals.length; i++) {
+	console.log((i + 1) +". " + animals[i].species + ": " + animals[i].tagline)
+};
+
+// Part 2b: Filter Animals (extra credit)
+
+for (i=0; i<animals.length; i++) 
+	if (animals[i].species !== animals[0].relationships.friends[i] ) {
+	console.log((i + 1) +". " + animals[i].species + ": " + animals[i].tagline)
+};
+
+//Scenario 
