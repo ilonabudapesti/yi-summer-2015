@@ -9,6 +9,8 @@ var noiseArray = [];
 noiseArray[0] = "bark";
 noiseArray.push("woof");
 noiseArray.splice(0,0,"yip");
+console.log(noiseArray.length);
+console.log(noiseArray.length-1);
 noiseArray[3] = "growl";
 var noizes = "noises";
 animal[noizes] = noiseArray;
@@ -46,4 +48,3 @@ matches.push('dog', 'bird', 'duck');
 for(i=0; i<animals.length; i++) {
 	animals[i].relationships = relationships;
 };
-

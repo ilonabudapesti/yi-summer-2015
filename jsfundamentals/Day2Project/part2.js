@@ -47,4 +47,52 @@ for (i=0; i<animals.length; i++)
 	console.log((i + 1) +". " + animals[i].species + ": " + animals[i].tagline)
 };
 
-//Scenario 
+// Scenario 3: Search and Add friends
+var animalSearch = function (species) {
+	for (var index in animals) {
+		for ( var key in animals[index] ) {
+			if (species === animals[index][key]) {
+				console.log(animals[index]);
+				return animals[index];
+			}
+		}
+	}
+};
+findFriend = animalSearch('dog');
+
+findFriend.relationships.friends.push("bird");
+
+/* I've realized at this point that all relationships are referencing the
+  original relationships object, and when I try to add a friend or match, 
+  it does so for all other animals as well. According to the instructions
+  as I understand it, I was supposed to loop through animals, nesting the
+ relationship object inside each animal object. */
+
+findFriend.relationships.matches.push("muskrat");
+
+// Scenario 4: Edit Animal Profile Page
+
+findFriend.species = "cat";
+findFriend.noises = ['meow','nyan','purr','hiss'];
+for (i=0;i<animals.length;i++) {
+	animals[i].relationships.matches.push('alligator');
+};
+//Scenario 5: Edit Animal Collection Data
+
+for (i=0;i<animals.length;i++) {
+	animals[i].name = animals[i].species;
+	delete animals[i].species;
+
+}
+
+//Wiping all friends lists only requires wiping one of the friends lists.
+//I've elected not to do it so I have a little more feedback about previous
+//changes I made.
+
+
+
+
+
+
+
+
