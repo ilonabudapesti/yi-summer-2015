@@ -60,3 +60,91 @@ $ git config --global core.editor "subl -n -w"
    - If you prefer to read: [Dev Tools Docs](https://developer.chrome.com/devtools)
    - Dev Tools [Cheatsheet](http://anti-code.com/devtools-cheatsheet/)
    - Advanced features [list on StackOverflow](http://stackoverflow.com/questions/16752622/chrome-developer-tools-best-resource-for-learning-advanced-features)
+
+## JS Fundamentals
+
+- data types: number, string, boolean, object, null, undefined
+- operators: basic, advanced, under-the-hood
+- arrays
+- objects
+
+## Functional JS
+
+- functions
+- higher order functions
+- closure
+- scope
+- lexical scope
+- callbacks
+- promises
+- ES6 generator
+- ES6 bracket
+- rewrite underscore naive
+- read underscore.js source
+
+## jQuery
+
+- http://jqfundamentals.com/
+- read jquery source
+- rewrite jquery
+- ajax
+
+## OO JS
+
+- instantiation patterns
+- classical inheritance in other languages
+- prototype
+- constructor
+- Ch. 6 of the Definitive Guide
+- [JavaScript Design Patterns](http://addyosmani.com/resources/essentialjsdesignpatterns/book/)
+  - Constructor Pattern
+  - Module Pattern
+  - Revealing Module Pattern
+  - Singleton Pattern
+  - Observer Pattern
+  - Mediator Pattern
+  - Prototype Pattern
+  - Command Pattern
+  - Facade Pattern
+  - Factory Pattern
+  - Mixin Pattern
+  - Decorator Pattern
+  - Flyweight Pattern
+
+## MVC
+
+- rewrite Barebones.js
+- read Backbone.js source
+- Angular.js
+- Angular-formly
+
+## MEAN
+
+- Node.js intro
+- Express
+
+## Git
+
+- git basics
+- branching
+- develop & drill workflow
+- merge vs rebase
+
+## Testing
+
+- rewrite mini-testing framework from scratch
+- mocha chai sinon
+- karma
+- jasmine
+- phantom and casper
+
+## Deployment
+
+- heroku
+- aws
+
+## Polymer 
+
+- webcomponents
+
+## Brain teasers
