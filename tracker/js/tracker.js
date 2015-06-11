@@ -1,17 +1,10 @@
 var allEntries = [];
 var entryID = 0;
-var currentUser = 0; //represents an anonymous user
+var currentUser = FALSE; //no user logged in initally
 
 var currentDateString = moment().format('YYYY-MM-DDTHH:mm');
 $('#inputStart').val(currentDateString);
 $('#inputEnd').val(currentDateString);
-
-function User(name, email, password)
-{
-	this.name = name;
-	this.email = email.toLowerCase();
-	this.password = password;
-}
 
 function Entry(start, end, description, tags)
 {
@@ -26,7 +19,6 @@ function Entry(start, end, description, tags)
 	
 	this.duration = Math.floor( Math.abs(this.end - this.start) / 60000 ); //convert to minutes
 	this.id = ++entryID;
-	this.user = currentUser;
 }
 
 var addEntry = function() {
@@ -201,4 +193,23 @@ var buildStats = function() {
 			+ value + '</td></tr>');
 	});
 	$('#statsByTagRows').show(500);
+}
+
+var registerNewUser = function() {
+	var userInputName = $('#userInputName').val();
+	var userInputEmail = $('#userInputEmail').val();
+	userInputEmail = userInputEmail.toLowerCase();
+	var userInputPassword = $('#userInputPassword').val();
+
+	var userStorage = new Object();
+	userStorage.name = userInputName;
+	userStorage.password = userInputPassword;
+	userStorage.entries = allEntries; //save current entries to the new user that is registering
+
+	var userStorageJSON = JSON.stringify(userStorage);
+
+	//Check if user already exists
+	if (!localStorage.getItem(userInputEmail)) {
+	  	localStorage.setItem(userInputEmail,userStorageJSON);
+	}
 }
