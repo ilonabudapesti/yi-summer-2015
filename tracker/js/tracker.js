@@ -1,10 +1,11 @@
 var allEntries = [];
 var entryID = 0;
-var currentUser = FALSE; //no user logged in initally
+var currentUser = false; //no user logged in initally
 
 var currentDateString = moment().format('YYYY-MM-DDTHH:mm');
+var currentDateStringPlusTen = moment().add(10, 'minutes').format('YYYY-MM-DDTHH:mm');
 $('#inputStart').val(currentDateString);
-$('#inputEnd').val(currentDateString);
+$('#inputEnd').val(currentDateStringPlusTen);
 
 function Entry(start, end, description, tags)
 {
@@ -52,6 +53,8 @@ var removeEntry = function(element) {
 	});
 	
 	$(element).closest('tr').hide(500);
+
+	updateUser();
 }
 
 var updateEntries = function() {
@@ -84,6 +87,8 @@ var updateEntries = function() {
 	});
 
 	buildStats();
+
+	updateUser();
 }
 
 var editEntry = function(element) {
@@ -211,5 +216,57 @@ var registerNewUser = function() {
 	//Check if user already exists
 	if (!localStorage.getItem(userInputEmail)) {
 	  	localStorage.setItem(userInputEmail,userStorageJSON);
+	}
+
+	//Log the new user in
+	currentUser = userInputEmail;
+
+	$("#loggedOutNav").hide();
+	$("#loggedInNav p").html('Welcome, ' + userInputName + '!');
+	$("#loggedInNav").show();
+}
+
+var updateUser = function() {
+	if(currentUser){
+		var userStorageJSON = localStorage.getItem(currentUser);
+		var userStorage = JSON.parse(userStorageJSON);
+
+		userStorage.entries = allEntries;
+
+		var userStorageJSON = JSON.stringify(userStorage);
+
+		localStorage.setItem(currentUser,userStorageJSON);
+	}
+}
+
+var logOut = function() {
+	currentUser = false;
+	$("#loggedOutNav").show();
+	$("#loggedInNav").hide();
+
+	allEntries = [];
+	updateEntries();
+}
+
+var logIn = function() {
+	var logInEmail = $('#logInEmail').val();
+	logInEmail = logInEmail.toLowerCase();
+	var logInPass = $('#logInPass').val();
+
+	if (localStorage.getItem(logInEmail)) {
+	  	var userStorageJSON = localStorage.getItem(logInEmail);
+		var userStorage = JSON.parse(userStorageJSON);
+	
+		if(userStorage.password === logInPass) {
+			//Log the verified user in
+			currentUser = logInEmail;
+			allEntries = userStorage.entries;
+
+			$("#loggedOutNav").hide();
+			$("#loggedInNav p").html('Welcome, ' + userStorage.name + '!');
+			$("#loggedInNav").show();
+
+			updateEntries();
+		}
 	}
 }

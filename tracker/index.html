@@ -33,23 +33,23 @@
           <a class="navbar-brand" href="#">Tracker Tractor</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
-	        <div id="loggedInNav">  
+	        <div id="loggedOutNav">  
 	          <form class="navbar-form navbar-right" role="form">
 	            <div class="form-group">
-	              <input type="text" placeholder="Email" class="form-control">
+	              <input id="logInEmail" type="text" placeholder="Email" class="form-control">
 	            </div>
 	            <div class="form-group">
-	              <input type="password" placeholder="Password" class="form-control">
+	              <input id="logInPass" type="password" placeholder="Password" class="form-control">
 	            </div>
-	            <button type="submit" class="btn btn-success">Sign in</button>
+	            <button type="button" class="btn btn-success" onclick="logIn()">Sign in</button>
 	            &nbsp;&nbsp;&nbsp;<button type="button" class="btn btn-info" data-toggle="modal" data-target="#modalRegister">Register</button>
 	          </form>
 	        </div>
-	        <div id="loggedOutNav" style="display:none">  
-	          <form class="navbar-form navbar-right" role="form">
-	            <p class="navbar-text" style="margin-top:7px;margin-bottom:7px;">Welcome, John</p>
-	            &nbsp;&nbsp;&nbsp;<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modalRegister">Log Out</button>
-	          </form>
+	        <div id="loggedInNav" style="display:none">  
+	           <form class="navbar-form navbar-right" role="form">
+	           	<p class="navbar-text" style="margin-top:7px;margin-bottom:7px;">Welcome!</p>
+	           	&nbsp;&nbsp;&nbsp;<button type="button" class="btn btn-danger" onclick="logOut()">Log Out</button>
+	           </form>
 	        </div>
         </div><!--/.navbar-collapse -->
       </div>
@@ -240,7 +240,7 @@
 		      </div>
 		      <div class="modal-footer">
 		        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-		        <button id="saveNewUser" type="button" class="btn btn-primary" data-dismiss="modal">Submit</button>
+		        <button id="saveNewUser" type="button" class="btn btn-primary" data-dismiss="modal" onclick="registerNewUser()">Submit</button>
 		      </div>
 		    </div>
 		  </div>
