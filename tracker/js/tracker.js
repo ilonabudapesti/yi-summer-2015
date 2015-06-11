@@ -1,3 +1,4 @@
+//All entries saved for logged in an anonymous users.
 var allEntries = [];
 var entryID = 0;
 var currentUser = false; //no user logged in initally
