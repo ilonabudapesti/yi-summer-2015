@@ -1,5 +1,5 @@
 var entries = [];
- var i = 0;
+var i = 0;
  function addEntry() {
   var entry = {};
   entry.description = document.getElementById("description").value;
@@ -22,7 +22,8 @@ var entries = [];
             }
         var deleteButton = document.createElement("button");
         deleteButton.setAttribute("id","deleteButton" + i);
-        deleteButton.setAttribute("value",'Delete Row');
+        deleteButton.innerHTML ="Delete Row";
+        //deleteButton.setAttribute("value",'Delete Row');
         var cell2 = document.createElement("td");
         cell2.appendChild(deleteButton);
         row.appendChild(cell2);
@@ -36,6 +37,7 @@ var k = i-1;
  $( "#deleteButton"+ k).click(function() 
   {
     $('#row'+ k).remove();
+    entries.splice($.inArray(entries), i);
   });
  return i;
 }
