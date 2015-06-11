@@ -1,6 +1,5 @@
 //Any code in part1.js is still accessible in this file! 
 //Try it out. See if you can console.log a variable from part1 (like animals) from this page.
-console.log(animals);
 
 var profileAnimal = animals[0];
 
@@ -27,7 +26,7 @@ for (var key in profileAnimal) {
 // Part 1a: Animal Relationship Data
 console.log(profileAnimal.relationships.friends);
 console.log(profileAnimal.relationships.matches);
-profileAnimal.relationships.friends['duck'] = undefined;
+delete profileAnimal.relationships.friends[1];
 
 // Part 2a: Log the Animals in a List
 for (i=0; i<animals.length; i++) {
@@ -59,15 +58,7 @@ var animalSearch = function (species) {
 	}
 };
 findFriend = animalSearch('dog');
-
 findFriend.relationships.friends.push("bird");
-
-/* I've realized at this point that all relationships are referencing the
-  original relationships object, and when I try to add a friend or match, 
-  it does so for all other animals as well. According to the instructions
-  as I understand it, I was supposed to loop through animals, nesting the
- relationship object inside each animal object. */
-
 findFriend.relationships.matches.push("muskrat");
 
 // Scenario 4: Edit Animal Profile Page
@@ -85,9 +76,11 @@ for (i=0;i<animals.length;i++) {
 
 }
 
-//Wiping all friends lists only requires wiping one of the friends lists.
-//I've elected not to do it so I have a little more feedback about previous
-//changes I made.
+/* Wiping all friends, which I'm not implementing yet.
+
+for (i = 0; i<animals.length; i++) {
+	animals[i].relationships.friends[i] = [];
+}*/
 
 
 

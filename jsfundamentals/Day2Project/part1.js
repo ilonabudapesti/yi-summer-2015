@@ -13,6 +13,8 @@ console.log(noiseArray.length);
 console.log(noiseArray.length-1);
 noiseArray[3] = "growl";
 var noizes = "noises";
+animal.noizes;  // undefined
+animal[noizes]; // null
 animal[noizes] = noiseArray;
 
 
@@ -42,9 +44,12 @@ friends.push(animals[0].species, animals[1].species);
 relationships = {};
 relationships["friends"] = friends;
 var matches = [];
-relationships['matches'] = matches;
-matches.push('dog', 'bird', 'duck');
+relationships['matches'] = [];
+relationships.matches.push('dog', 'bird', 'duck');
 
 for(i=0; i<animals.length; i++) {
-	animals[i].relationships = relationships;
-};
+	animals[i].relationships = {};
+	animals[i].relationships.friends = ["dog", "duck"];
+	animals[i].relationships.matches = ["dog", "bird","duck"];
+
+}
