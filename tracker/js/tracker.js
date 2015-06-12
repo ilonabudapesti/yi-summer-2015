@@ -8,7 +8,7 @@ $('#inputStart').val(currentDateString);
 $('#inputEnd').val(currentDateStringPlusTen);
 
 function Entry(start, end, description, tags) {
-    this.start = moment(start);
+      this.start = moment(start);
     this.end = moment(end);
     this.description = description;
     this.tags = tags.split(',');
@@ -40,7 +40,7 @@ var addEntry = function() {
         $('#entrySuccess').hide();
     }
 
-}
+};
 
 var removeEntry = function(element) {
     var removeID = $(element).closest('tr').data('entry-id');
@@ -52,7 +52,7 @@ var removeEntry = function(element) {
     $(element).closest('tr').hide(500);
 
     updateUser();
-}
+};
 
 var updateEntries = function() {
     //If entries are present show table. Otherwise show no entry message.
@@ -77,17 +77,21 @@ var updateEntries = function() {
     buildStats();
 
     updateUser();
-}
+};
 
 var editEntry = function(element) {
+    var editStart;
+    var editEnd;
+    var editDescription;
+    var editTags;
     var editID = $(element).closest('tr').data('entry-id');
 
     for (var i in allEntries) {
         if (allEntries[i].id === editID) {
-            var editStart = allEntries[i].start;
-            var editEnd = allEntries[i].end;
-            var editDescription = allEntries[i].description;
-            var editTags = allEntries[i].tags;
+            editStart = allEntries[i].start;
+            editEnd = allEntries[i].end;
+            editDescription = allEntries[i].description;
+            editTags = allEntries[i].tags;
             break;
         }
     }
@@ -102,7 +106,7 @@ var editEntry = function(element) {
     $('#editDescription').val(editDescription);
     $('#editTags').val(editTags.toString());
     $('#editSaveButton').attr('onclick', 'saveChanges(' + editID + ')');
-}
+};
 
 var saveChanges = function(editID) {
     //Get new values
@@ -124,7 +128,7 @@ var saveChanges = function(editID) {
     }
 
     updateEntries();
-}
+};
 
 var buildStats = function() {
     var statsByDay = {};
@@ -143,7 +147,7 @@ var buildStats = function() {
         } else statsByMonth[startStringMonth] += allEntries[i].duration;
 
         for (var k in allEntries[i].tags) {
-            if (allEntries[i].tags[k] != "") {
+            if (allEntries[i].tags[k] !== "") {
                 if (statsByTag[allEntries[i].tags[k]] === undefined) {
                     statsByTag[allEntries[i].tags[k]] = allEntries[i].duration;
                 } else statsByTag[allEntries[i].tags[k]] += allEntries[i].duration;
@@ -177,7 +181,7 @@ var buildStats = function() {
         $('#statsByTagRows').append('<tr><td>' + key + '</td><td>' + value + '</td></tr>');
     });
     $('#statsByTagRows').show(500);
-}
+};
 
 var registerNewUser = function() {
     var userInputName = $('#userInputName').val();
@@ -185,7 +189,7 @@ var registerNewUser = function() {
     userInputEmail = userInputEmail.toLowerCase();
     var userInputPassword = $('#userInputPassword').val();
 
-    var userStorage = new Object();
+    var userStorage = {};
     userStorage.name = userInputName;
     userStorage.password = userInputPassword;
     userStorage.entries = allEntries; //save current entries to the new user that is registering
@@ -203,7 +207,7 @@ var registerNewUser = function() {
     $("#loggedOutNav").hide();
     $("#loggedInNav p").html('Welcome, ' + userInputName + '!');
     $("#loggedInNav").show();
-}
+};
 
 var updateUser = function() {
     if (currentUser) {
@@ -212,11 +216,11 @@ var updateUser = function() {
 
         userStorage.entries = allEntries;
 
-        var userStorageJSON = JSON.stringify(userStorage);
+        userStorageJSON = JSON.stringify(userStorage);
 
         localStorage.setItem(currentUser, userStorageJSON);
     }
-}
+};
 
 var logOut = function() {
     currentUser = false;
@@ -225,7 +229,7 @@ var logOut = function() {
 
     allEntries = [];
     updateEntries();
-}
+};
 
 var logIn = function() {
     var logInEmail = $('#logInEmail').val();
@@ -248,4 +252,4 @@ var logIn = function() {
             updateEntries();
         }
     }
-}
+};
