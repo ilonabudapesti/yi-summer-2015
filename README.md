@@ -132,7 +132,7 @@ $ git config --global core.editor "subl -n -w"
 
 ## Testing
 
-- rewrite mini-testing framework from scratch
+- rewrite mini-testing framework from scratch [riot.js bdd](https://github.com/riot/riot/blob/2f3820e764932124f97e66cd3e5df36997bde1e8/bdd.js)
 - mocha chai sinon
 - karma
 - jasmine
