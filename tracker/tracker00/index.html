@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Native JS Tracker</title>
+    <script src="tracker.js"></script>
+  </head>
+  <body>
+
+    <div id="entries">
+      <form name="entry" id="entry">
+        Start time: <input type="text" name="start" id="start">
+        End time: <input type="text" name="end" id="end">
+        Description: <input type="text" name="description" id="description">
+        Tags: <input type="text" name="tags" id="tags">
+        <input type="button" id="save" onclick="submit()" value="Save">
+      </form>
+    </div>
+
+    <div id="tallies">
+      <div id="total">Total</div>
+      <div id="today">Today</div>
+      <div id="mtd">MTD</div>
+      <div id="per-tag">Per tag</div>
+    </div>
+
+  </body>
+</html>
