@@ -26,3 +26,6 @@ Other cool things:
 Some under the hood stuff
   - http://docs.sublimetext.info/en/latest/basic_concepts.html#the-packages-directory
   - fixed SublimeREPL node problem https://github.com/wuub/SublimeREPL/issues/364
+
+  Software engineering power tools
+    - http://dsernst.com/2015/06/11/software-engineering-power-tools/
