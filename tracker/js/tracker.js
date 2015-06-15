@@ -77,7 +77,6 @@ var updateEntries = function() {
         var thisEntry = this;
         thisEntry.startString = moment(this.start).format("MMM D, YYYY, h:mma");
 
-        //TODO: replace with template
         $('#entryRows').append( entryRowTemplate(thisEntry) );
     });
 
@@ -137,6 +136,17 @@ var saveChanges = function(editID) {
     updateEntries();
 };
 
+//TODO: replace with templating
+var buildStatsByGroup = function (statGroupId, statsCollection) {
+    $(statGroupId).empty();
+    $(statGroupId).hide();
+    //Rebuild the By Day table from the statsByDay object
+    $.each(statsCollection, function(key, value) {
+        $(statGroupId).append('<tr><td>' + key + '</td><td>' + value + '</td></tr>');
+    });
+    $(statGroupId).show(500);
+};
+
 var buildStats = function() {
     var statsByDay = {};
     var statsByMonth = {};
@@ -162,34 +172,9 @@ var buildStats = function() {
         }
     }
 
-    //TODO: refactor and replace with templating
-
-    //Empty By Day table rows
-    $('#statsByDayRows').empty();
-    $('#statsByDayRows').css("display", "none");
-    //Rebuild the By Day table from the statsByDay object
-    $.each(statsByDay, function(key, value) {
-        $('#statsByDayRows').append('<tr><td>' + key + '</td><td>' + value + '</td></tr>');
-    });
-    $('#statsByDayRows').show(500);
-
-    //Empty By Month table rows
-    $('#statsByMonthRows').empty();
-    $('#statsByMonthRows').css("display", "none");
-    //Rebuild the By Month table from the statsByMonth object
-    $.each(statsByMonth, function(key, value) {
-        $('#statsByMonthRows').append('<tr><td>' + key + '</td><td>' + value + '</td></tr>');
-    });
-    $('#statsByMonthRows').show(500);
-
-    //Empty By Tag table rows
-    $('#statsByTagRows').empty();
-    $('#statsByTagRows').css("display", "none");
-    //Rebuild the By Month table from the statsByMonth object
-    $.each(statsByTag, function(key, value) {
-        $('#statsByTagRows').append('<tr><td>' + key + '</td><td>' + value + '</td></tr>');
-    });
-    $('#statsByTagRows').show(500);
+    buildStatsByGroup('#statsByDayRows',statsByDay);
+    buildStatsByGroup('#statsByMonthRows',statsByMonth);
+    buildStatsByGroup('#statsByTagRows',statsByTag);
 };
 
 var registerNewUser = function() {
