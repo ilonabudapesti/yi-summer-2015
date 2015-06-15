@@ -8,7 +8,7 @@ $('#inputStart').val(currentDateString);
 $('#inputEnd').val(currentDateStringPlusTen);
 
 function Entry(start, end, description, tags) {
-      this.start = moment(start);
+    this.start = moment(start);
     this.end = moment(end);
     this.description = description;
     this.tags = tags.split(',');
@@ -21,10 +21,10 @@ function Entry(start, end, description, tags) {
 }
 
 var addEntry = function() {
-    var start = $('#inputStart').val();
-    var end = $('#inputEnd').val();
-    var description = $('#inputDescription').val();
-    var tags = $('#inputTags').val();
+    var start = document.getElementById("inputStart").value;
+    var end = document.getElementById("inputEnd").value;
+    var description = document.getElementById("inputDescription").value;
+    var tags = document.getElementById("inputTags").value;
 
     //Validate date before adding the entry
     if (moment(start).isValid() && moment(end).isValid()) {
@@ -54,6 +54,10 @@ var removeEntry = function(element) {
     updateUser();
 };
 
+//Use handlebars to create template for entry rows
+var entryRowSource = $("#entry-row-template").html();
+var entryRowTemplate = Handlebars.compile(entryRowSource);
+
 var updateEntries = function() {
     //If entries are present show table. Otherwise show no entry message.
     if (allEntries.length === 0) {
@@ -67,11 +71,14 @@ var updateEntries = function() {
     //Empty table rows
     $('#entryRows').empty();
 
+
     //Rebuild the table from the allEntries array
     $.each(allEntries, function() {
-        var startString = moment(this.start).format("MMM D, YYYY, h:mma");
+        var thisEntry = this;
+        thisEntry.startString = moment(this.start).format("MMM D, YYYY, h:mma");
 
-        $('#entryRows').append('<tr data-entry-id="' + this.id + '"><td>' + startString + '</td><td>' + this.duration + '</td><td>' + this.description + '</td><td>' + this.tags + '</td><td>' + '<button style="float:none;" onclick="editEntry(this)" type="button" class="close" aria-label="Close" data-toggle="modal" data-target="#modalEdit"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></button>&nbsp;' + '<button style="float:none;" onclick="removeEntry(this)" type="button" class="close" aria-label="Close"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button></td></tr>');
+        //TODO: replace with template
+        $('#entryRows').append( entryRowTemplate(thisEntry) );
     });
 
     buildStats();
@@ -154,6 +161,8 @@ var buildStats = function() {
             }
         }
     }
+
+    //TODO: refactor and replace with templating
 
     //Empty By Day table rows
     $('#statsByDayRows').empty();

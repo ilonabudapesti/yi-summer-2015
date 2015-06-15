@@ -34,7 +34,7 @@
             </div>
             <div id="navbar" class="navbar-collapse collapse">
                 <div id="loggedOutNav">
-                    <form class="navbar-form navbar-right" role="form">
+                    <form class="navbar-form navbar-right" role="form" name="loginForm">
                         <div class="form-group">
                             <input id="logInEmail" type="text" placeholder="Email" class="form-control">
                         </div>
@@ -112,6 +112,18 @@
                     </thead>
                     <tbody id="entryRows">
                     </tbody>
+                    <script id="entry-row-template" type="text/x-handlebars-template">
+                        <tr data-entry-id="{{id}}">
+                            <td>{{startString}}</td>
+                            <td>{{duration}}</td>
+                            <td>{{description}}</td>
+                            <td>{{tags}}</td>
+                            <td>
+                                <button style="float:none;" onclick="editEntry(this)" type="button" class="close" aria-label="Close" data-toggle="modal" data-target="#modalEdit"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></button>&nbsp;
+                                <button style="float:none;" onclick="removeEntry(this)" type="button" class="close" aria-label="Close"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
+                            </td>
+                        </tr>
+                    </script>
                 </table>
                 <hr style="margin-top:40px">
                 <h2>Your Stats</h2>
@@ -221,7 +233,7 @@
                         <h4 class="modal-title" id="myModalLabel">Create an Account</h4>
                     </div>
                     <div class="modal-body">
-                        <form>
+                        <form id="userForm">
                             <div class="form-group">
                                 <label for="userInputName">First Name</label>
                                 <input type="text" class="form-control" id="userInputName" placeholder="First Name">
