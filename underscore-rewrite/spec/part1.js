@@ -193,6 +193,12 @@
 
         expect(uniqueNumbers).to.not.equal(numbers);
       });
+      it('should handle null and undefined', function(){
+        var mixedArray = [1,2,2,3,3,'3','3',null, null,undefined,undefined,undefined,'unrefined'];
+        var uniqueMixedArray = [1, 2, 3, "3", null, undefined, "unrefined"];
+
+        expect(_.uniq(mixedArray)).to.eql(uniqueMixedArray);
+      });
     });
 
     describe('map', function() {
