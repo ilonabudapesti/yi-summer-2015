@@ -3,6 +3,13 @@
 Jun 16:
 - How does inheritance work in Javascript?
 - What kind of scope do variables have?
+
+Answer: The two main types of scope are global and local. Global variables
+are accessible anywhere in the code. Local variables are only accessible
+in the function in which they were created. A variable can be global whever
+it is assigned a value without being declared.
+
+Source: http://www.w3schools.com/js/js_scope.asp 
 - What is a closure?
 - What is function hoisting?
 
