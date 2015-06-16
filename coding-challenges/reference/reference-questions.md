@@ -6,6 +6,8 @@ Jun 16:
 - What is a closure?
 - What is function hoisting?
 
+Answer: http://javascriptissexy.com/javascript-variable-scope-and-hoisting-explained/
+
 Jun 17:
 - What is variable hoisting?
 - What does the keyword 'new' do?
