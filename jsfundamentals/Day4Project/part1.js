@@ -42,19 +42,35 @@ function dataTypeChecker (animal) {
 		}
 	}
 
+
 function capitalizeVals (animal) {
 	for (var key in animal) {
-		function capitalize() {
-		var capital = animal[key].substr(0,1).toUpperCase();
-		var rest = animal[key].substr(1, animal[key].length-1);
-		var result = capital+rest;
-		return result;
-		};
-	var object = animal[key];
-	var newObj = {}
-	newObj[key] = capitalize(object);
-	key++
-	return newObj;	
+		if (typeof animal[key] === 'string') {
+			capitalize(animal[key]);
+		}
 	}
-	
+	return animal;
 }
+function capitalize(str){
+	str = str[0].toUpperCase() + str.slice(1);
+	return str; 
+			// var capital = animal[key].substr(0,1).toUpperCase();
+			// var rest = animal[key].substr(1, animal[key][value].length-1);
+			// var result = capital+rest;
+}
+
+
+
+
+
+
+// function search(word) {
+// if (isNaN(cat.search(word)) === false) {
+//  var find = cat.search(word);
+//  var lookup = word.length;
+// var result = find + "," +(find+lookup);
+// }
+// return result;
+// }
+
+
