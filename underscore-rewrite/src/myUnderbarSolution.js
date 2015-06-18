@@ -203,7 +203,7 @@
       var serialization = JSON.stringify(arguments);
       return memos[serialization] = memos[serialization] || func.apply(this, arguments);
     };
-      };
+  };
 
   _.delay = function(func, wait) {
 
