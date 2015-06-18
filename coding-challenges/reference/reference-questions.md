@@ -62,8 +62,8 @@ Jun 17:
 - What kind of things must you be wary of when design or - developing for multilingual sites?
 - What are data- attributes good for?
 - Describe the difference between a cookie, sessionStorage - and localStorage.
-- Describe the difference between <script>, <script async> - and <script defer>.
-- Why is it generally a good idea to position CSS <link> - between <head></head> and JS <script> just before </body>- ? Do you know any exceptions?
+- Describe the difference between `<script>`, `<script async>` and `<script defer>`
+- Why is it generally a good idea to position CSS `<link>` between `<head></head>` and JS `<script>` just before `</body>`? Do you know any exceptions?
 - What's the difference between an attribute and a proprety?- 
 - What are different ways to get an element from the DOM (without jQuery)?
 

@@ -4,9 +4,8 @@
   window._ = {};
 
   _.identity = function(val) {
-
     return val;
-      };
+  };
 
   /**
    * COLLECTIONS
@@ -140,7 +139,6 @@
 
   _.some = function(collection, iterator) {
 
-
     iterator = iterator || _.identity;
 
     return !_.every(collection, function(item) {
@@ -163,7 +161,7 @@
     });
 
     return obj;
-      };
+  };
 
   _.defaults = function(obj) {
 
@@ -174,7 +172,7 @@
     });
 
     return obj;
-      };
+  };
 
 
   /**
