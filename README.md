@@ -182,3 +182,13 @@ Some under the hood stuff
 
   Software engineering power tools
     - http://dsernst.com/2015/06/11/software-engineering-power-tools/
+
+# Good tools
+
+- [collabedit](http://collabedit.com)
+- [online whiteboarding](https://awwapp.com)
+- [randomizer](https://www.random.org/lists/)
+- [regex builder]()
+- [JSON prettifier]()
+- [Angular dev tools]()
+- [Backbone dev tools]()
