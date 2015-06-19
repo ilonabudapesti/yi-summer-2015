@@ -1,5 +1,15 @@
 # Angular
 
+Old paradigm
+- mapquest
+- Rails
+- backend-heavy web development
+
+New paradigm
+- google maps
+- Angular
+- rich and super rich clients
+
 ## watch/read
 
 - [Introduction to Angular.js in 50 Examples (part 1)](https://www.youtube.com/watch?v=TRrL5j3MIvo)
