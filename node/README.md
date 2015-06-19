@@ -2,14 +2,20 @@
 
 ## mini install fest
 
-## read/watch
+## closely read/write out
 
+- Smashing Node.js: JavaScript Everywhere, by Guillermo Rauch (chapters)
+  - the setup: 1
+  - basics: chapters 3, 4, 5
+  - middleware: 7, 8, 9
+  - testing: 16
+
+## optional  
+- Professional Node.js: Building JavaScript Based Scalable Software, by Pedro Teixera
+  - http: chapters 11, 13, 16
+  - middleware: chapters 20, 21
 - [MEAN stack tutorials](https://www.youtube.com/playlist?list=PLoYCgNOIyGAApoDfJHjmMgGNlYenKg5jO) node, express, mongo
 - https://speakerdeck.com/rdegges/how-to-build-an-api-service-in-30-minutes-with-express-dot-js
-
-## optional
-
-- [Node.js Tutorial with Ryan Dahl, creator of Node.js](https://www.youtube.com/watch?v=eqlZD21DME0)
 
 ## auth
 
