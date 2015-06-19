@@ -113,7 +113,7 @@ $ git config --global core.editor "subl -n -w"
 
 ## MVC
 
-- rewrite Barebones.js
+- [rewrite Barebones.js](https://kuychaco.github.io/Barebone.js/docs/BAREBONE.html)
 - read Backbone.js source
 - Angular.js
 - Angular-formly
