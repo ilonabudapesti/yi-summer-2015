@@ -113,7 +113,7 @@ $ git config --global core.editor "subl -n -w"
 
 ## MVC
 
-- rewrite Barebones.js
+- [rewrite Barebones.js](https://kuychaco.github.io/Barebone.js/docs/BAREBONE.html)
 - read Backbone.js source
 - Angular.js
 - Angular-formly
@@ -182,3 +182,13 @@ Some under the hood stuff
 
   Software engineering power tools
     - http://dsernst.com/2015/06/11/software-engineering-power-tools/
+
+# Good tools
+
+- [collabedit](http://collabedit.com)
+- [online whiteboarding](https://awwapp.com)
+- [randomizer](https://www.random.org/lists/)
+- [regex builder]()
+- [JSON prettifier]()
+- [Angular dev tools]()
+- [Backbone dev tools]()
