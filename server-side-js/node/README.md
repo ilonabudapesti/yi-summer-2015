@@ -22,3 +22,7 @@
 - http://devcenter.kinvey.com/html5/tutorials/how-to-implement-safe-signin-via-oauth
 - https://speakerdeck.com/rdegges/everything-you-ever-wanted-to-know-about-authentication-in-node-dot-js
 - https://www.youtube.com/watch?v=yvviEA1pOXw
+
+## quotes
+
+"Node stems primarily from trying to solve the file upload progress-bar problem" (uploading files via http was not possible before 2005, mind you) - by Ryan Dahl creator of Node.js

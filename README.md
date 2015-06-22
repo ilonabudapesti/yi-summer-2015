@@ -70,16 +70,16 @@ $ git config --global core.editor "subl -n -w"
 
 ## Functional JS
 
-- functions
-- higher order functions
-- closure
-- scope
-- lexical scope
-- callbacks
+- [x] functions
+- [x] higher order functions
+- [x] closure
+- [x] execution context
+- [x] lexical scope
+- [x] callbacks
 - promises
 - ES6 generator
 - ES6 bracket
-- rewrite underscore naive
+- [x] rewrite underscore naive
 - read underscore.js source
 
 ## jQuery
@@ -192,3 +192,9 @@ Some under the hood stuff
 - [JSON prettifier]()
 - [Angular dev tools]()
 - [Backbone dev tools]()
+- prototyping
+  - [farmer.js](http://framerjs.com/)
+
+# Cool sites
+
+- [180 sites in 180 days](http://jenniferdewalt.com/)
