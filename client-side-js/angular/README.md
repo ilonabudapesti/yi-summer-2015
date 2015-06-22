@@ -16,3 +16,8 @@ New paradigm
 - [Introduction to Angular.js in 50 Examples (part 2)](https://www.youtube.com/watch?v=6J08m1H2BME)
 - [Introduction to Angular.js in 50 Examples repo] (https://github.com/curran/screencasts/tree/gh-pages/introToAngular)
 - [MEAM stack tutorials](https://www.youtube.com/playlist?list=PLoYCgNOIyGAApoDfJHjmMgGNlYenKg5jO) angular
+- [Sample Mobile Application with AngularJS](http://coenraets.org/blog/2013/11/sample-mobile-application-with-angularjs/)
+
+## UI/UX
+
+- attractive examples from [behance](https://www.behance.net/)
