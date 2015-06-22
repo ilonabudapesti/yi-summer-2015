@@ -1,6 +1,5 @@
 //Use this file to implement Part One of your project
 
-<<<<<<< HEAD
 var animal = {};
 animal.species = 'dog';
 animal['tagline'] = 'ruhroh';
@@ -54,6 +53,4 @@ for(i=0; i<animals.length; i++) {
 	animals[i].relationships.matches = ["dog", "bird","duck"];
 
 }
-=======
-var animal;
->>>>>>> 87f015e5836ea4a79f337e140bcffd45830b7617
+
