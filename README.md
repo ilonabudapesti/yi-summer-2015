@@ -70,16 +70,16 @@ $ git config --global core.editor "subl -n -w"
 
 ## Functional JS
 
-- functions
-- higher order functions
-- closure
-- scope
-- lexical scope
-- callbacks
+- [x] functions
+- [x] higher order functions
+- [x] closure
+- [x] execution context
+- [x] lexical scope
+- [x] callbacks
 - promises
 - ES6 generator
 - ES6 bracket
-- rewrite underscore naive
+- [x] rewrite underscore naive
 - read underscore.js source
 
 ## jQuery
@@ -113,7 +113,7 @@ $ git config --global core.editor "subl -n -w"
 
 ## MVC
 
-- rewrite Barebones.js
+- [rewrite Barebones.js](https://kuychaco.github.io/Barebone.js/docs/BAREBONE.html)
 - read Backbone.js source
 - Angular.js
 - Angular-formly
@@ -182,3 +182,19 @@ Some under the hood stuff
 
   Software engineering power tools
     - http://dsernst.com/2015/06/11/software-engineering-power-tools/
+
+# Good tools
+
+- [collabedit](http://collabedit.com)
+- [online whiteboarding](https://awwapp.com)
+- [randomizer](https://www.random.org/lists/)
+- [regex builder]()
+- [JSON prettifier]()
+- [Angular dev tools]()
+- [Backbone dev tools]()
+- prototyping
+  - [farmer.js](http://framerjs.com/)
+
+# Cool sites
+
+- [180 sites in 180 days](http://jenniferdewalt.com/)

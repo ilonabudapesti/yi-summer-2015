@@ -17,25 +17,23 @@ var board = [
 function continentCounter (board, x, y) {
   // we fell off the board
   // or we fell into water
-  if (x < 0 || x > 9 || y < 0 || y > 9 || board[x][y] === "water") {
+  if ( board[x] === undefined || board[x][y] !== "land") {
     return 0;
   }
 
   var count = 1;
   board[x][y] = true;
 
-  count = count + continentCounter(board, x-1, y-1);
-  count = count + continentCounter(board, x-1, y);
-  count = count + continentCounter(board, x-1, y+1);
+  count += continentCounter(board, x-1, y-1);
+  count += continentCounter(board, x-1, y);
+  count += continentCounter(board, x-1, y+1);
 
-  count = count + continentCounter(board, x, y-1);
-  count = count + continentCounter(board, x, y+1);
+  count += continentCounter(board, x, y-1);
+  count += continentCounter(board, x, y+1);
 
-
-  count = count + continentCounter(board, x+1, y-1);
-  count = count + continentCounter(board, x+1, y);
-  count = count + continentCounter(board, x+1, y+1);
-
+  count += continentCounter(board, x+1, y-1);
+  count += continentCounter(board, x+1, y);
+  count += continentCounter(board, x+1, y+1);
 
   return count;
 }
