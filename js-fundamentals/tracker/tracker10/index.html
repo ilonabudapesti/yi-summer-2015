@@ -1,0 +1,38 @@
+<form name="entry" id="entryid">
+  Start time: <input type="text" name="start" id="startid">
+  End time: <input type="text" name="end" id="end">
+  Description: <input type="text" name="description" id="description">
+  Tags: <input type="text" name="tags" id="tags">
+  <input type="button" id="save" value="Save">
+</form>
+
+<!-- <script src="tracker.js"></script> -->
+<script type="text/javascript">
+  var entries = [];
+  console.log('We start with zero entries', entries);
+
+  function addEntry(form) {
+    entries.push(parseEntry(form));
+    document.entry.reset();
+  };
+
+  function submit() {
+    addEntry(document.entry);
+    console.log('We added a new entry to our entries: ', entries);
+  }
+  
+  document.querySelector('#save').addEventListener('click', submit);
+
+  // helpers start here
+  
+  function parseEntry(form){
+    var entry = {};
+    form = Array.prototype.slice.call(form);
+    form.forEach(function(elem){
+      if (elem.type !== 'button'){
+        entry[elem.name] = elem.name === "tags" ? elem.value.split(',') : elem.value;
+      }
+    });
+    return entry;
+  }
+</script>
