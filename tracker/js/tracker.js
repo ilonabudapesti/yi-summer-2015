@@ -1,185 +1,249 @@
 var allEntries = [];
 var entryID = 0;
+var currentUser = false; //no user logged in initally
 
 var currentDateString = moment().format('YYYY-MM-DDTHH:mm');
+var currentDateStringPlusTen = moment().add(10, 'minutes').format('YYYY-MM-DDTHH:mm');
 $('#inputStart').val(currentDateString);
-$('#inputEnd').val(currentDateString);
+$('#inputEnd').val(currentDateStringPlusTen);
 
-function Entry(start, end, description, tags)
-{
-	this.start = moment(start);
-	this.end = moment(end);
-	this.description = description;
-	this.tags = tags.split(',');
-	
-	this.duration = Math.floor( Math.abs(this.end - this.start) / 60000 ); //convert to minutes
-	this.id = ++entryID;
+function Entry(start, end, description, tags) {
+    this.start = moment(start);
+    this.end = moment(end);
+    this.description = description;
+    this.tags = tags.split(',');
+    for (var i in this.tags) {
+        this.tags[i] = this.tags[i].trim();
+    }
+
+    this.duration = Math.floor(Math.abs(this.end - this.start) / 60000); //convert to minutes
+    this.id = ++entryID;
 }
 
 var addEntry = function() {
-	var start = $('#inputStart').val();
-	var end = $('#inputEnd').val();
-	var description = $('#inputDescription').val();
-	var tags = $('#inputTags').val();
+    var start = document.getElementById("inputStart").value;
+    var end = document.getElementById("inputEnd").value;
+    var description = document.getElementById("inputDescription").value;
+    var tags = document.getElementById("inputTags").value;
 
-	//Validate date before adding the entry
-	if(moment(start).isValid() && moment(end).isValid()) {
-		var newEntry = new Entry(start, end, description, tags);
-		allEntries.push(newEntry);
-		
-		updateEntries();
-		$('#entrySuccess').show();
-		$('#dateWarning').hide();
-	}
-	else {
-		//Throw error
-		$('#dateWarning').show();
-		$('#entrySuccess').hide();
-	}
-	
-}
+    //Validate date before adding the entry
+    if (moment(start).isValid() && moment(end).isValid()) {
+        var newEntry = new Entry(start, end, description, tags);
+        allEntries.push(newEntry);
+
+        updateEntries();
+        $('#entrySuccess').show();
+        $('#dateWarning').hide();
+    } else {
+        //Throw error
+        $('#dateWarning').show();
+        $('#entrySuccess').hide();
+    }
+
+};
 
 var removeEntry = function(element) {
-	var removeID = $(element).closest('tr').data('entry-id');
-   
-	allEntries = $.grep(allEntries, function(entry) {
-		return entry.id !== removeID;
-	});
-	
-	updateEntries();
-}
+    var removeID = $(element).closest('tr').data('entry-id');
+
+    allEntries = $.grep(allEntries, function(entry) {
+        return entry.id !== removeID;
+    });
+
+    $(element).closest('tr').hide(500);
+
+    updateUser();
+};
+
+//Use handlebars to create template for entry rows
+var entryRowSource = $("#entry-row-template").html();
+var entryRowTemplate = Handlebars.compile(entryRowSource);
 
 var updateEntries = function() {
-	//If entries are present show table. Otherwise show no entry message.
-	if(allEntries.length === 0) {
-		$('#noEntryMessage').show();
-		$('#entryTable').hide();
-	}
-	else
-	{
-		$('#noEntryMessage').hide();
-		$('#entryTable').show();
-	}
-	
-	//Empty table rows
-	$('#entryRows').empty();
-	
-	//Rebuild the table from the allEntries array
-	$.each(allEntries, function() {
-		var startString = moment(this.start).format("MMM D, YYYY, h:mma"); 
-		
-		$('#entryRows').append('<tr data-entry-id="' 
-			+ this.id + '"><td>' 
-			+ startString + '</td><td>'  
-			+ this.duration + '</td><td>' 
-			+ this.description + '</td><td>' 
-			+ this.tags + '</td><td>'
-			+ '<button style="float:none;" onclick="editEntry(this)" type="button" class="close" aria-label="Close" data-toggle="modal" data-target="#modalEdit"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></button>&nbsp;'
-			+ '<button style="float:none;" onclick="removeEntry(this)" type="button" class="close" aria-label="Close"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button></td></tr>');
-	});
+    //If entries are present show table. Otherwise show no entry message.
+    if (allEntries.length === 0) {
+        $('#noEntryMessage').show();
+        $('#entryTable').hide();
+    } else {
+        $('#noEntryMessage').hide();
+        $('#entryTable').show();
+    }
 
-	buildStats();
-}
+    //Empty table rows
+    $('#entryRows').empty();
+
+
+    //Rebuild the table from the allEntries array
+    $.each(allEntries, function() {
+        var thisEntry = this;
+        thisEntry.startString = moment(this.start).format("MMM D, YYYY, h:mma");
+
+        $('#entryRows').append( entryRowTemplate(thisEntry) );
+    });
+
+    buildStats();
+
+    updateUser();
+};
 
 var editEntry = function(element) {
-	var editID = $(element).closest('tr').data('entry-id');
-	
-	for (var i in allEntries) {
-		if (allEntries[i].id === editID) {
-    		var editStart = allEntries[i].start;
-			var editEnd = allEntries[i].end;
-			var editDescription = allEntries[i].description;
-			var editTags = allEntries[i].tags;
-    		break;
-		}
-	}
+    var editStart;
+    var editEnd;
+    var editDescription;
+    var editTags;
+    var editID = $(element).closest('tr').data('entry-id');
 
-	var startString = moment(editStart).format('YYYY-MM-DDTHH:mm'); 
+    for (var i in allEntries) {
+        if (allEntries[i].id === editID) {
+            editStart = allEntries[i].start;
+            editEnd = allEntries[i].end;
+            editDescription = allEntries[i].description;
+            editTags = allEntries[i].tags;
+            break;
+        }
+    }
 
-	var endString = moment(editEnd).format('YYYY-MM-DDTHH:mm');
+    var startString = moment(editStart).format('YYYY-MM-DDTHH:mm');
 
-	//set current values and onclick action for entry
-	$('#editStart').val(startString);
-	$('#editEnd').val(endString);
-	$('#editDescription').val(editDescription);
-	$('#editTags').val(editTags.toString());
-	$('#editSaveButton').attr('onclick','saveChanges(' + editID + ')');
-}
+    var endString = moment(editEnd).format('YYYY-MM-DDTHH:mm');
+
+    //set current values and onclick action for entry
+    $('#editStart').val(startString);
+    $('#editEnd').val(endString);
+    $('#editDescription').val(editDescription);
+    $('#editTags').val(editTags.toString());
+    $('#editSaveButton').attr('onclick', 'saveChanges(' + editID + ')');
+};
 
 var saveChanges = function(editID) {
-	//Get new values
-	var start = $('#editStart').val();
-	var end = $('#editEnd').val();
-	var description = $('#editDescription').val();
-	var tags = $('#editTags').val();
+    //Get new values
+    var start = $('#editStart').val();
+    var end = $('#editEnd').val();
+    var description = $('#editDescription').val();
+    var tags = $('#editTags').val();
 
-	//Save new values to replace existing entry
-	for (var i in allEntries) {
-		if (allEntries[i].id === editID) {
-    		allEntries[i].start = moment(start);
-			allEntries[i].end = moment(end);
-			allEntries[i].description = description;
-			allEntries[i].tags = tags.split(',');
-			allEntries[i].duration = Math.floor( Math.abs(allEntries[i].end - allEntries[i].start) / 60000 ); 
-    		break;
-		}
-	}
+    //Save new values to replace existing entry
+    for (var i in allEntries) {
+        if (allEntries[i].id === editID) {
+            allEntries[i].start = moment(start);
+            allEntries[i].end = moment(end);
+            allEntries[i].description = description;
+            allEntries[i].tags = tags.split(',');
+            allEntries[i].duration = Math.floor(Math.abs(allEntries[i].end - allEntries[i].start) / 60000);
+            break;
+        }
+    }
 
-	updateEntries();
-}
+    updateEntries();
+};
+
+//TODO: replace with templating
+var buildStatsByGroup = function (statGroupId, statsCollection) {
+    $(statGroupId).empty();
+    $(statGroupId).hide();
+    //Rebuild the By Day table from the statsByDay object
+    $.each(statsCollection, function(key, value) {
+        $(statGroupId).append('<tr><td>' + key + '</td><td>' + value + '</td></tr>');
+    });
+    $(statGroupId).show(500);
+};
 
 var buildStats = function() {
-	var statsByDay = {};
-	var statsByMonth = {};
-	var statsByTag = {};
+    var statsByDay = {};
+    var statsByMonth = {};
+    var statsByTag = {};
 
-	for (var i in allEntries) {
-		var startStringDay = moment(allEntries[i].start).format('YYYY-MM-DD');
-		if(statsByDay[ startStringDay ] === undefined) {
-			statsByDay[ startStringDay ] = allEntries[i].duration;
-		}
-        else statsByDay[ startStringDay ] += allEntries[i].duration;
+    for (var i in allEntries) {
+        var startStringDay = moment(allEntries[i].start).format('YYYY-MM-DD');
+        if (statsByDay[startStringDay] === undefined) {
+            statsByDay[startStringDay] = allEntries[i].duration;
+        } else statsByDay[startStringDay] += allEntries[i].duration;
 
         var startStringMonth = moment(allEntries[i].start).format('YYYY-MM');
-        if(statsByMonth[ startStringMonth ] === undefined) {
-        	statsByMonth[ startStringMonth ] = allEntries[i].duration;
-        }
-        else statsByMonth[ startStringMonth ] += allEntries[i].duration;
-        
+        if (statsByMonth[startStringMonth] === undefined) {
+            statsByMonth[startStringMonth] = allEntries[i].duration;
+        } else statsByMonth[startStringMonth] += allEntries[i].duration;
+
         for (var k in allEntries[i].tags) {
-		    if(allEntries[i].tags[k] != "") {
-		        if(statsByTag[ allEntries[i].tags[k] ] === undefined) {
-		        	statsByTag[ allEntries[i].tags[k] ] = allEntries[i].duration;
-		        }
-		        else statsByTag[ allEntries[i].tags[k] ] += allEntries[i].duration;
-		    }
-	    }
-	}
+            if (allEntries[i].tags[k] !== "") {
+                if (statsByTag[allEntries[i].tags[k]] === undefined) {
+                    statsByTag[allEntries[i].tags[k]] = allEntries[i].duration;
+                } else statsByTag[allEntries[i].tags[k]] += allEntries[i].duration;
+            }
+        }
+    }
 
-	//Empty By Day table rows
-	$('#statsByDayRows').empty();
-	//Rebuild the By Day table from the statsByDay object
-	$.each(statsByDay, function(key,value) {
-		$('#statsByDayRows').append('<tr><td>' 
-			+ key + '</td><td>' 
-			+ value + '</td></tr>');
-	});
+    buildStatsByGroup('#statsByDayRows',statsByDay);
+    buildStatsByGroup('#statsByMonthRows',statsByMonth);
+    buildStatsByGroup('#statsByTagRows',statsByTag);
+};
 
-	//Empty By Month table rows
-	$('#statsByMonthRows').empty();
-	//Rebuild the By Month table from the statsByMonth object
-	$.each(statsByMonth, function(key,value) {
-		$('#statsByMonthRows').append('<tr><td>' 
-			+ key + '</td><td>' 
-			+ value + '</td></tr>');
-	});
+var registerNewUser = function() {
+    var userInputName = $('#userInputName').val();
+    var userInputEmail = $('#userInputEmail').val();
+    userInputEmail = userInputEmail.toLowerCase();
+    var userInputPassword = $('#userInputPassword').val();
 
-	//Empty By Tag table rows
-	$('#statsByTagRows').empty();
-	//Rebuild the By Month table from the statsByMonth object
-	$.each(statsByTag, function(key,value) {
-		$('#statsByTagRows').append('<tr><td>' 
-			+ key + '</td><td>' 
-			+ value + '</td></tr>');
-	});
-}
+    var userStorage = {};
+    userStorage.name = userInputName;
+    userStorage.password = userInputPassword;
+    userStorage.entries = allEntries; //save current entries to the new user that is registering
+
+    var userStorageJSON = JSON.stringify(userStorage);
+
+    //Check if user already exists
+    if (!localStorage.getItem(userInputEmail)) {
+        localStorage.setItem(userInputEmail, userStorageJSON);
+    }
+
+    //Log the new user in
+    currentUser = userInputEmail;
+
+    $("#loggedOutNav").hide();
+    $("#loggedInNav p").html('Welcome, ' + userInputName + '!');
+    $("#loggedInNav").show();
+};
+
+var updateUser = function() {
+    if (currentUser) {
+        var userStorageJSON = localStorage.getItem(currentUser);
+        var userStorage = JSON.parse(userStorageJSON);
+
+        userStorage.entries = allEntries;
+
+        userStorageJSON = JSON.stringify(userStorage);
+
+        localStorage.setItem(currentUser, userStorageJSON);
+    }
+};
+
+var logOut = function() {
+    currentUser = false;
+    $("#loggedOutNav").show();
+    $("#loggedInNav").hide();
+
+    allEntries = [];
+    updateEntries();
+};
+
+var logIn = function() {
+    var logInEmail = $('#logInEmail').val();
+    logInEmail = logInEmail.toLowerCase();
+    var logInPass = $('#logInPass').val();
+
+    if (localStorage.getItem(logInEmail)) {
+        var userStorageJSON = localStorage.getItem(logInEmail);
+        var userStorage = JSON.parse(userStorageJSON);
+
+        if (userStorage.password === logInPass) {
+            //Log the verified user in
+            currentUser = logInEmail;
+            allEntries = userStorage.entries;
+
+            $("#loggedOutNav").hide();
+            $("#loggedInNav p").html('Welcome, ' + userStorage.name + '!');
+            $("#loggedInNav").show();
+
+            updateEntries();
+        }
+    }
+};
