@@ -21,6 +21,27 @@
 *   - Write a test suite with mocha, add specs and a spec runner to test your function.
 */
 
-var rockPaperScissors = function () {
-  // TODO: your solution here
+var rockPaperScissors = function (rounds) {
+
+    rounds = rounds || 3;
+    var outcomes = [];
+
+    var plays = ['rock', 'paper', 'scissors'];
+
+    var createNextRound = function(roundsToGo, playedSoFar) {
+      
+      if( roundsToGo === 0 ){
+        outcomes.push( playedSoFar );
+        return;
+      }
+
+      for( var i = 0; i < plays.length; i++ ){
+        var currentPlay = plays[i];
+        createNextRound( roundsToGo-1, playedSoFar.concat(currentPlay) );
+      }
+    };
+
+    createNextRound( rounds, [] );
+
+    return outcomes;
 };
