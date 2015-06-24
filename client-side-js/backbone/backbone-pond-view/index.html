@@ -1,0 +1,35 @@
+<html>
+  <head>
+    <title>Pond Maker</title>
+  </head>
+  <body>
+    <script src="lib/jquery.js"></script>
+    <script src="lib/underscore.js"></script>
+    <script src="lib/backbone.js"></script>
+    <script src="fishModel.js"></script>
+    <script src="pondView.js"></script>
+    <script src="fishView.js"></script>
+    <script type="text/javascript">
+      var goldfish = new Fish({
+        name: 'Goldfish',
+        image: 'http://tinyurl.com/n4vgcl5'
+      });
+      var fugu = new Fish({
+        name: 'Pufferfish',
+        image: 'http://tinyurl.com/kxd7cuu'
+      });
+      var tuna = new Fish({
+        name: 'Tuna',
+        image: 'http://tinyurl.com/kxd7cuu'
+      });
+      var unagi = new Fish();
+
+      var myPond = new Backbone.Collection([goldfish, fugu, tuna, unagi], {model: Fish});
+      var pondView = new PondView({collection: myPond});
+
+      /*$(function(){
+        $('body').append(pondView.render());
+      });*/
+    </script>
+  </body>
+</html>
