@@ -25,4 +25,6 @@
 
 ## quotes
 
-"Node stems primarily from trying to solve the file upload progress-bar problem" (uploading files via http was not possible before 2005, mind you) - by Ryan Dahl creator of Node.js
+"Node stems primarily from trying to solve the file upload progress-bar problem" (uploading files via http was not possible before 2005, mind you) 
+"They say synchronous code is hard to write. We are not addressing that. Our problem is: writing network servers easily."
+- by Ryan Dahl creator of Node.js
