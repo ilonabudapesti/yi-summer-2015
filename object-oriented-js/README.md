@@ -1,0 +1,21 @@
+## OO JS
+
+- instantiation patterns
+- classical inheritance in other languages
+- prototype
+- constructor
+- Ch. 6 of the Definitive Guide
+- [JavaScript Design Patterns](http://addyosmani.com/resources/essentialjsdesignpatterns/book/)
+  - Constructor Pattern
+  - Module Pattern
+  - Revealing Module Pattern
+  - Singleton Pattern
+  - Observer Pattern
+  - Mediator Pattern
+  - Prototype Pattern
+  - Command Pattern
+  - Facade Pattern
+  - Factory Pattern
+  - Mixin Pattern
+  - Decorator Pattern
+  - Flyweight Pattern

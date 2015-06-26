@@ -54,19 +54,19 @@
 // // accessor properties
 
 
-// // factory pattern
-// function Cperson (theName, toes, height, shape, hairColor, nostrils ) {
-//   var o = new Object();
-//   o.name = theName;
-//   o.toes = toes;
-//   o.sayCountOfToes = function () {
-//     console.log("I am a person. And I have ", o.toes, ' toes!');
-//   }
-//   return o;
-// }
+// factory pattern
+function Cperson (theName, toes, height, shape, hairColor, nostrils ) {
+  var o = new Object();
+  o.name = theName;
+  o.toes = toes;
+  o.sayCountOfToes = function () {
+    console.log("I am a person. And I have ", o.toes, ' toes!');
+  }
+  return o;
+}
 
-// var horace = new Person('Horace', 11);
-// // drawback: no instanceof, contructor p to Person
+var horace = Person('Horace', 11);
+// drawback: no instanceof, contructor p to Person
 
 // // constructor pattern -> global
 // function Person (name, toes) {
@@ -86,12 +86,12 @@
 // Person('Sherlock', 35);
 
 
-// superclass
-// function Person (name) {
+//superclass
+function Person (name) {
 
-//   this.name = name || "Eve";
+  this.name = name || "Eve";
 
-// }
+}
 
 // Person.prototype.name = "Adam";
 // Person.prototype.age = Infinity;
@@ -127,28 +127,28 @@
 // thomas.sayStuff();
 
 
-// Person.prototype = {
+Person.prototype = {
   
-//   // reconnect constructor
-//   constructor: Person,
+  // reconnect constructor
+  constructor: Person,
 
-//   name: "Adam",
-//   age: Infinity,
-//   shape: 'humanoid',
-//   nostrils: 2,
-//   toes: 10,
-//   sayStuff: function() {
-//     console.log('all in one');
-//   }
-// };
+  name: "Adam",
+  age: Infinity,
+  shape: 'humanoid',
+  nostrils: 2,
+  toes: 10,
+  sayStuff: function() {
+    console.log('all in one');
+  }
+};
 
-// //
-// console.log('friend stuff coming here: ================= ');
-// var friend = new Person();
-// console.log( friend instanceof Object );
-// console.log( friend instanceof Person );
-// console.log( friend.constructor === Object );
-// console.log( friend.constructor === Person );
+//
+console.log('friend stuff coming here: ================= ');
+var friend = new Person();
+console.log( friend instanceof Object );
+console.log( friend instanceof Person );
+console.log( friend.constructor === Object );
+console.log( friend.constructor === Person );
 
 
 /*if (typeof Object.create === 'undefined') {

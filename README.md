@@ -81,6 +81,7 @@ $ git config --global core.editor "subl -n -w"
 - ES6 bracket
 - [x] rewrite underscore naive
 - read underscore.js source
+- [ES6](https://leanpub.com/exploring-es6/read?utm_medium=email&utm_source=jsfiddle)
 
 ## jQuery
 

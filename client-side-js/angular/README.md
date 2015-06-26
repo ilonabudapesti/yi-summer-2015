@@ -19,6 +19,14 @@ New paradigm
 - [Sample Mobile Application with AngularJS](http://coenraets.org/blog/2013/11/sample-mobile-application-with-angularjs/)
 - [The official Angular Tutorial](https://docs.angularjs.org/tutorial) - seems long
 
+## custom filters
+
+- http://jacopretorius.net/2013/05/custom-sorting-in-angularjs.html
+- http://toddmotto.com/everything-about-custom-filters-in-angular-js/
+- http://stackoverflow.com/questions/12040395/custom-sort-function-in-ng-repeat
+- https://docs.angularjs.org/guide/filter
+- https://docs.angularjs.org/tutorial/step_09#test
+
 ## UI/UX
 
 - attractive examples from [behance](https://www.behance.net/)
