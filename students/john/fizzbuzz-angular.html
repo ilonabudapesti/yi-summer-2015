@@ -1,0 +1,32 @@
+<html ng-app="nameApp">
+  <head>
+    <meta charset="utf-8">
+    <title>Angular Fizz Buzz</title>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.1/angular.min.js"></script>
+    <script>
+      var nameApp = angular.module('nameApp', []);
+      nameApp.controller('NameCtrl', function ($scope){
+        var counter = 1;
+        $scope.output = 1;
+
+        $scope.incrementCount = function() {
+          counter++;
+          if ( counter % 3 === 0 && counter % 5 === 0) {
+            $scope.output = 'FizzBuzz'; 
+          } else if ( counter % 3 === 0 ) {
+            $scope.output = 'Fizz';
+          } else if ( counter % 5 === 0 ) {
+            $scope.output = 'Buzz';
+          } else {
+            $scope.output = counter;
+          }
+        };
+
+      });
+    </script>
+  </head>
+  <body ng-controller="NameCtrl">
+      <h1>
+      <a href="" ng-click="incrementCount()">{{output}}</a></h1>
+  </body>
+</html>
