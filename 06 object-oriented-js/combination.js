@@ -1,8 +1,6 @@
 // pseudo-classical pattern
 // mixed/combination constructor-prototype pattern
-
 function Person() {
-
 }
 
 Person.prototype.name = "Adam";
@@ -10,11 +8,6 @@ Person.prototype.age = 30;
 Person.prototype.job = "developer";
 Person.prototype.sayName = function() {
   console.log('My name is ', this.name);
-}
-
-
-function Person() {
-
 }
 
 Person.prototype = {
