@@ -2,8 +2,8 @@
     == that your ajax calls are allowed by the browser == */
 
 $.ajaxPrefilter(function(settings, _, jqXHR) {
-  jqXHR.setRequestHeader("X-Parse-Application-Id", "/*your Application ID*/");
-  jqXHR.setRequestHeader("X-Parse-REST-API-Key", "/*your REST API key*/");
+  jqXHR.setRequestHeader("X-Parse-Application-Id", "N8UiK3h4Bc7zoRttId4RJNrKmwP8JFrp9benpYdn");
+  jqXHR.setRequestHeader("X-Parse-REST-API-Key", "wVvA7P5fs5l6oOX9tdIBpvugmb4Hv6UAhFve6jvj");
 });
 
 /* ========================================================= */
