@@ -167,7 +167,7 @@
 
     _.each(Array.prototype.slice.call(arguments, 1), function(object) {
       _.each(object, function(prop, key) {
-        obj[key] === undefined && (obj[key] = prop);
+        obj[key] === undefined && obj[key] = prop;
       });
     });
 
