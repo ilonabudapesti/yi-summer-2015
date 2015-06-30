@@ -20,13 +20,81 @@ var tweet = {
 
 var get = function() {
 
+  $.ajax({
+   
+      // The URL for the request
+      url: url,
+   
+      // Whether this is a POST or GET request
+      type: "GET",
+   
+      // The type of data we expect back
+      dataType : "json",
+   
+      // Code to run if the request succeeds;
+      // the response is passed to the function
+      success: function( json ) {
+          console.log( "GET worked!");
+          console.log(json);
+      },
+   
+      // Code to run if the request fails; the raw request and
+      // status codes are passed to the function
+      error: function( xhr, status, errorThrown ) {
+          console.log( "Error: " + errorThrown );
+          console.log( "Status: " + status );
+          console.dir( xhr );
+      },
+   
+      // Code to run regardless of success or failure
+      complete: function( xhr, status ) {
+      }
+  });
+
 };
 
 // Write your POST request here
 
 var post = function() {
- 
+
+    $.ajax({
+   
+      // The URL for the request
+      url: url,
+   
+      // The data to send (will be converted to a query string)
+      data: JSON.stringify(tweet),
+   
+      // Whether this is a POST or GET request
+      type: "POST",
+   
+      // The type of data we expect back
+      dataType : "json",
+   
+      // Code to run if the request succeeds;
+      // the response is passed to the function
+      success: function( json ) {
+          console.log( "POST worked!");
+          console.log(json);
+      },
+   
+      // Code to run if the request fails; the raw request and
+      // status codes are passed to the function
+      error: function( xhr, status, errorThrown ) {
+          console.log( "Error: " + errorThrown );
+          console.log( "Status: " + status );
+          console.dir( xhr );
+      },
+   
+      // Code to run regardless of success or failure
+      complete: function( xhr, status ) {
+          
+      }
+  });
+
 };
 
 
 // Invoke your code here
+post();
+get();
