@@ -18,7 +18,7 @@ var tweet = {
 
 // Write your GET request here
 
-var get = function() {
+var get = function(callback) {
 
   $.ajax({
    
@@ -30,6 +30,8 @@ var get = function() {
    
       // The type of data we expect back
       dataType : "json",
+
+      data: {order:'-createdAt'},
    
       // Code to run if the request succeeds;
       // the response is passed to the function
@@ -55,7 +57,7 @@ var get = function() {
 
 // Write your POST request here
 
-var post = function() {
+var post = function(callback) {
 
     $.ajax({
    
@@ -64,6 +66,7 @@ var post = function() {
    
       // The data to send (will be converted to a query string)
       data: JSON.stringify(tweet),
+
    
       // Whether this is a POST or GET request
       type: "POST",
@@ -76,6 +79,7 @@ var post = function() {
       success: function( json ) {
           console.log( "POST worked!");
           console.log(json);
+          get();
       },
    
       // Code to run if the request fails; the raw request and
@@ -97,4 +101,3 @@ var post = function() {
 
 // Invoke your code here
 post();
-get();
