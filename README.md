@@ -176,6 +176,7 @@ $ git config --global core.editor "subl -n -w"
 
 ## CS
 - [Algorithms 4th ed.](http://www.amazon.com/Algorithms-4th-Robert-Sedgewick/dp/032157351X)
+- [cool sorting visualization](https://www.youtube.com/watch?v=kPRA0W1kECg)
 
 ## Brain teasers
 
