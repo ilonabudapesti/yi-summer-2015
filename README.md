@@ -149,6 +149,35 @@ $ git config --global core.editor "subl -n -w"
 
 - webcomponents
 
+## Data Structures
+- Linked Lists
+- Binary Trees
+- Tries
+- Stacks
+- Queues
+- Vectors / ArrayLists
+- Hash Tables
+
+## Algorithms
+- Breadth First Search
+- Depth First Search
+- Binary Search
+- Merge Sort
+- Quick Sort
+- Tree Insert / Find / e.t.c.
+
+## Concepts
+- Bit Manipulation
+- Singleton Design Pattern
+- Factory Design Pattern
+- Memory (Stack vs. Heap)
+- Recursion
+- Big-O Time
+
+## CS
+- [Algorithms 4th ed.](http://www.amazon.com/Algorithms-4th-Robert-Sedgewick/dp/032157351X)
+- [cool sorting visualization](https://www.youtube.com/watch?v=kPRA0W1kECg)
+
 ## Brain teasers
 
 # Developer Tools
@@ -169,15 +198,20 @@ Cons:
   - nothing else?
 
 Keyboard shortcuts I like
+
   - http://sublime-text-unofficial-documentation.readthedocs.org/en/latest/reference/keyboard_shortcuts_osx.html
+
 Key mappings I like
   - https://github.com/bohdon/sublimeAlternateVIMNavigation/blob/master/Default%20(OSX).sublime-keymap
+
 Packages I like
   - http://www.hongkiat.com/blog/sublime-text-refresh-browser/
   - http://www.sitepoint.com/10-essential-sublime-text-plugins-full-stack-developer/
+
 Other cool things:
   - https://scotch.io/bar-talk/best-of-sublime-text-3-features-plugins-and-settings
   - this whole thing is very good http://sublime-text-unofficial-documentation.readthedocs.org/
+
 Some under the hood stuff
   - http://docs.sublimetext.info/en/latest/basic_concepts.html#the-packages-directory
   - fixed SublimeREPL node problem https://github.com/wuub/SublimeREPL/issues/364
