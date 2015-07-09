@@ -1,0 +1,58 @@
+{
+  "projects": [
+    {
+      "id": 1,
+      "owner": 1,
+      "name": "Class Finder",
+      "status": "On Track"
+    },
+    {
+      "id": 2,
+      "owner": 1,
+      "name": "PID Builder",
+      "status": "Delayed"
+    },
+    {
+      "id": 3,
+      "owner": 3,
+      "name": "Complex Datastrutures Thingy",
+      "status": "Complete"
+    },
+    {
+      "id": 4,
+      "owner": 3,
+      "name": "Sequence Builder",
+      "status": "Not started"
+    },
+    {
+      "id": 5,
+      "owner": 3,
+      "name": "JSON template",
+      "status": "Complete"
+    },
+    {
+      "id": 6,
+      "owner": 3,
+      "name": "Tweets Client",
+      "status": "Complete"
+    },
+    {
+      "id": 7,
+      "owner": 3,
+      "name": "Tweets Servers",
+      "status": "Complete"
+    },
+    {
+      "id": 8,
+      "owner": 3,
+      "name": "Rock-Paper-Scissors",
+      "status": "Complete"
+    },
+    {
+      "id": 9,
+      "owner": 3,
+      "name": "Civilzation III",
+      "status": "Complete"
+    }
+  ]
+}

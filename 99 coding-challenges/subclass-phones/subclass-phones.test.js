@@ -1,6 +1,3 @@
-(function() {
-  'use strict';
-  
   describe('Phone', function(){
     it('should be callable as a constructor', function(){
       var phone = new Phone();
@@ -113,5 +110,3 @@
       smartPhone.send.should.equal(SmartPhone.prototype.send);
     });
   });
-
-}());

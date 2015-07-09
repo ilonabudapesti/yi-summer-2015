@@ -1,0 +1,34 @@
+{
+  "employees": [
+    {
+      "id": 1,
+      "name": "BG",
+      "role": "Lead TA",
+      "organization": "YI"
+    },
+    {
+      "id": 2,
+      "name": "Johnny D.",
+      "role": "Class Lead",
+      "organization": "YI"
+    },
+    {
+      "id": 3,
+      "name": "King Faraji",
+      "role": "Infrastructure Lead Engineer",
+      "organization": "YI"
+    },
+    {
+      "id": 4,
+      "name": "William II",
+      "role": "Lead Tech Mentor",
+      "organization": "YI"
+    },
+    {
+      "id": 5,
+      "name": "IB",
+      "role": "Professor",
+      "organization": "HRR"
+    }
+  ]
+}
