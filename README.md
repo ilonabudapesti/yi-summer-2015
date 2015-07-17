@@ -1,55 +1,5 @@
 # Yoga Institute Summer Code Camp 2015
 
-# TOC
-
-- [Install Fest]
-- [Pre-camp Reading]
-
-## Install Fest
-
-Estimated time needed: 2 hrs.
-System requirement: Mac
-
-* [Install Chrome](https://www.google.com/intl/en/chrome/browser/desktop/index.html)
-* [Install Sublime 3](http://www.sublimetext.com/3) (don't use 2)
-    * Symlink subl.  Assuming you've placed Sublime Text in the Applications folder, and that you have a ~/bin directory in your path, you can run:    
-
-```
-ln -s "/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl" ~/bin/subl
-```
-* Install HomeBrew, a useful package manager for Mac
-
-```
-ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-```
- 
-* Install Node
-    * [Create Apple ID](https://appleid.apple.com/account) if you don't have one already
-    * [Install Xcode](https://itunes.apple.com/us/app/xcode/id497799835?ls=1&mt=12) from the App Store
-    * Open terminal: `Command + Space` to open  Spotlight and type `terminal`
-    
-    ```
-    brew install node
-    ```
-
-* Join
-    * [GitHub](https://github.com/join)
-    * [StackOverflow](https://stackoverflow.com/users/signup)
-* Git configuration
-    * git config your name, email and editor
-        
-    ```
-$ git config --global user.name "Joan Doe"
-$ git config --global user.email joandoe@example.com
-$ git config --global core.editor "subl -n -w"
-    ```
-    
-    TODO: add Sublime setup
-      - Node build
-      - package manager
-      - recommended packages
-      - key mappings
-
 ## Pre-Camp Reading
 
 - JS The Definitive Guide 6th ed. Chapters 1-8
@@ -76,12 +26,14 @@ $ git config --global core.editor "subl -n -w"
 - [x] execution context
 - [x] lexical scope
 - [x] callbacks
-- promises
+- [x] ES6 promises
 - ES6 generator
 - ES6 bracket
 - [x] rewrite underscore naive
 - read underscore.js source
 - [ES6](https://leanpub.com/exploring-es6/read?utm_medium=email&utm_source=jsfiddle)
+  - [Q](https://github.com/kriskowal/q)
+  - [bluebird](https://github.com/petkaantonov/bluebird)
 
 ## jQuery
 
@@ -131,6 +83,7 @@ $ git config --global core.editor "subl -n -w"
 - branching
 - develop & drill workflow
 - merge vs rebase
+- [how to rebase a PR](https://github.com/edx/edx-platform/wiki/How-to-Rebase-a-Pull-Request)
 
 ## Testing
 

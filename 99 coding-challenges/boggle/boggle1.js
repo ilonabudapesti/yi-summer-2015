@@ -1,5 +1,5 @@
 // Boggle Dice Letter Distribution
-var diceFaces = [
+var die = [
                   "AAEEGN",
                   "ABBJOO",
                   "ACHOPS",
@@ -16,7 +16,15 @@ var diceFaces = [
                   "ELRTTY",
                   "HIMNUQ",
                   "HLNNRZ"
-                ];
+          ];
+
+// example board
+var board = [
+  ["a", "f", "e", "c"],
+  ["b", "r", "q", "g"],
+  ["p", "o", "k", "e"],
+  ["q", "t", "e", "s"]
+];  
 
 // write a function that randomly generates a boggle board
 
