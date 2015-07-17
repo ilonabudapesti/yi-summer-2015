@@ -1,4 +1,4 @@
-/*function eat(meal){
+function eat(meal){
   console.log("Meal before bite: ", meal);
   console.log("Eating " + meal.pop() + ". Yumm!");
   if (meal.length) {
@@ -22,7 +22,6 @@ eat(veggieMeal);
 var veggieMeal = ["veggie soup", "tofu", "vegan protein shake"];
 eatIteratively(veggieMeal);
 
-*/
 
 
 

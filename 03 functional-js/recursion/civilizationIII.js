@@ -39,3 +39,25 @@ function continentCounter (board, x, y) {
 }
 
 continentCounter(board,  0, 4); // 31
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
