@@ -13,7 +13,7 @@
 
 ## JS Fundamentals
 
-- data types: number, string, boolean, object, null, undefined
+- data types: number, string, boolean, object, null, undefined + symbol (es6)
 - operators: basic, advanced, under-the-hood
 - arrays
 - objects
@@ -27,13 +27,17 @@
 - [x] lexical scope
 - [x] callbacks
 - [x] ES6 promises
-- ES6 generator
+- [x] ES6 generator
 - ES6 bracket
 - [x] rewrite underscore naive
 - read underscore.js source
 - [ES6](https://leanpub.com/exploring-es6/read?utm_medium=email&utm_source=jsfiddle)
   - [Q](https://github.com/kriskowal/q)
   - [bluebird](https://github.com/petkaantonov/bluebird)
+  - [babel-node](http://www.2ality.com/2015/03/babel-on-node.html)
+  - [Scratch.js](https://chrome.google.com/webstore/detail/scratch-js/alploljligeomonipppgaahpkenfnfkn?hl=en-US) es6 chrome extension
+  - [arrow functions](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions)
+  - [weakmaps](http://ilikekillnerds.com/2015/02/what-are-weakmaps-in-es6/)
 
 ## jQuery
 
@@ -76,6 +80,10 @@
 - Node.js intro
 - Express
 - Angular
+- [firebase](https://www.firebase.com/docs/web/quickstart.html) Back-end as a Service
+- Learn Mongo through [Mongo University](https://university.mongodb.com/)
+  - [M101P](https://university.mongodb.com/courses/M101P/about)
+  - [M101JS](https://university.mongodb.com/courses/M101JS/about)
 
 ## Git
 
@@ -97,6 +105,7 @@
 
 - heroku
 - aws
+- azure
 
 ## Polymer 
 
