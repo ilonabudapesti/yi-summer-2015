@@ -28,11 +28,11 @@ function addRow() {
 
 function deleteRow(cell) {
   var row = cell.parentNode.parentNode;
-  var table = row.parentNode;
-  var index = row.rowIndex;
-  table.deleteRow(index);
 }
 
 function editRow(cell) {
+  var table = row.parentNode;
+  var index = row.rowIndex;
+  table.deleteRow(index);
   
 }
