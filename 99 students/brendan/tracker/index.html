@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tracker</title>
+    <script src="js/jquery-1.11.3.js"></script>
+    <script src="js/underscore.js"></script>
+    <script src="js/app.js"></script>
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body class="center">
+    <header>
+        <nav>
+            <span><h5> Welcome! <a id="btn-sign" href="#">Sign In</a> <a id="btn-new" href="#">New User</a></h5></span>
+        </nav>
+    </header>
+    <section id="trackerSection" class="center">
+        
+        <table id="trackerTable" class="center">
+            <thead>
+                <tr>
+                    <th colspan="6">Activity Tracker</th>    
+                </tr>
+                <tr>
+                    <th class="wid-110">Tags</th>
+                    <th class="wid-110">Duration</th>
+                    <th class="wid-110">Started</th>
+                    <th class="wid-110">Stopped</th>
+                    <th class="wid-180">Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="taskRow">
+                    <td class="tagsTd">
+                        <input class="tagInput" type="text" name="tags" placeholder="comma, separated">
+                    </td>
+                    <td class="durationTd">
+                        <span class="durationSpan"></span>
+                    </td>
+                    <td class="startTd">
+                        <input class="startInput wid-110" type="text" name="start">
+                    </td>
+                    <td class="stopTd">
+                        <input class="stopInput wid-110" type="text" name="stop">
+                    </td>
+                    <td class="descriptionTd">
+                        <input class="descriptionInput wid-180" type="text" name="description">
+                    </td>
+                    <td class="buttonTd">
+                        <a class="btn btn-edit hidden">Edit</a>
+                        <a class="btn btn-save">Save</a>
+                        <a class="btn btn-delete hidden">Delete</a>
+                    </td>
+                </tr>
+            </tbody>
+            <tfoot>
+                
+            </tfoot>
+        </table>
+    </section>
+    <footer>
+
+        <table id="favoriteActivitiesTable">
+            <thead>
+                <tr>
+                    <th colspan="2"> 
+                        <h4>Favorite Activities</h4>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="favoriteRow">
+                    <td>Tag Name</td>
+                    <td>Duration</td>
+                </tr>
+            </tbody>
+        </table>          
+
+        <table id="perDayTable">
+            <thead>
+                <tr>
+                    <th colspan="2"> 
+                        <h4>Total Time Per Day</h4>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="perDayRow">
+                    <td>Tag Name</td>
+                    <td>Duration</td>
+                </tr>
+            </tbody>
+        </table>        
+        <table id="perMonthTable">
+            <thead>
+                <tr>
+                    <th colspan="2"> 
+                        <h4>Total Time This Month</h4>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="perMonthRow">
+                    <td colspan="2">Duration</td>
+                </tr>
+            </tbody>
+
+    </footer>
+</body>
+</html>

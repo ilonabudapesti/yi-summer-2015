@@ -1,0 +1,115 @@
+.debug {
+    background-color: red;
+}
+
+.center {
+    margin: 0 auto;
+}
+
+.hidden {
+    visibility: hidden; 
+}
+
+.wid-70 {
+  width: 70px;
+  max-width: 70px;
+}
+
+.wid-110 {
+    width: 110px;
+    max-width: 110px;
+}
+
+.wid-180 {
+    width: 180px;
+    max-width: 180px
+}
+
+body {
+    width: 80%;
+
+}
+
+header {
+    height: 70px;
+    background-color: #DDDDDD;
+    min-width: 850px;
+}
+
+
+section {
+    padding: 25px;
+    background-color: #EFEFEF;
+    min-width: 800px;
+}
+
+span {
+    font-size: .9em;
+}
+
+#perDayTable, #favoriteActivitiesTable, #perMonthTable {
+  display: inline-block;
+  margin-right: 50px ; 
+  margin-left: 50px ;
+  vertical-align: top;
+}
+
+#favoriteActivitiesTable tbody td {
+  padding: 5px;
+}
+
+#trackerSection table, td, tr, thead, th {
+    border: 1px solid #11D;
+    border-spacing: 10px;   
+    border-width: 20;
+    /* border-collapse: collapse; */
+}
+
+#trackerSection td, th {
+    padding: 8px;
+    overflow: scroll;
+}
+
+footer {
+    background-color: #DDDDDD;
+    min-width: 850px;
+    padding: 25px;
+}
+
+footer td {
+  padding: 3px;
+}
+
+h4, h5{
+    margin: 0px;
+    padding: 10px;
+}
+
+
+/* http://css3buttongenerator.com/ */
+.btn {
+    background: #488ebd;
+    background-image: -webkit-linear-gradient(top, #488ebd, #6a9dbd);
+    background-image: -moz-linear-gradient(top, #488ebd, #6a9dbd);
+    background-image: -ms-linear-gradient(top, #488ebd, #6a9dbd);
+    background-image: -o-linear-gradient(top, #488ebd, #6a9dbd);
+    background-image: linear-gradient(to bottom, #488ebd, #6a9dbd);
+    -webkit-border-radius: 8;
+    -moz-border-radius: 8;
+    border-radius: 8px;
+    font-family: Arial;
+    color: #ffffff;
+    font-size: 15px;
+    padding: 5px 10px 5px 10px;
+    text-decoration: none;
+}
+
+.btn:hover {
+    background: #3cb0fd;
+    background-image: -webkit-linear-gradient(top, #3cb0fd, #3498db);
+    background-image: -moz-linear-gradient(top, #3cb0fd, #3498db);
+    background-image: -ms-linear-gradient(top, #3cb0fd, #3498db);
+    background-image: -o-linear-gradient(top, #3cb0fd, #3498db);
+    background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
+    text-decoration: none;
+}
