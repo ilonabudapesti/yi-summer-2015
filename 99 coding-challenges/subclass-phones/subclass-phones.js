@@ -38,9 +38,24 @@ var makeSmartPhone = function(phoneNumber, email){
 // Here are the constructors to get you started
 
 var Phone = function(phoneNumber) {
-
+  this.phoneNumber = phoneNumber;
+};
+Phone.prototype.send = function(recipientPhoneNumber, message){
+  return 'sending the message "'+ message +'" to the phone number ' + recipientPhoneNumber;
 };
 
 var SmartPhone = function(phoneNumber, email) {
-
+  Phone.call(this, phoneNumber);
+  this.email = email;
 };
+SmartPhone.prototype = Object.create(Phone.prototype);
+SmartPhone.prototype.constructor = SmartPhone;
+SmartPhone.prototype.send = function(recipientPhoneNumberOrEmail, message){
+    if(typeof recipientPhoneNumberOrEmail === 'number'){
+      var recipientPhoneNumber = recipientPhoneNumberOrEmail;
+      Phone.prototype.send(recipientPhoneNumber, message);
+    } else {
+      var recipientEmail = recipientPhoneNumberOrEmail;
+      return 'sending the message "'+ message +'" to ' + recipientEmail;
+    }
+  };

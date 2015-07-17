@@ -659,6 +659,12 @@ What if we wanted to write a function that calls a function twice?
 
 It will have two named parameters, func for the function and arg for the argument that you will pass it. If you pass the alert function, and the string ‘hi’, you want the function to result in 2 alert pop ups with the word hi alert(‘hi’)
 
+function makeTwoAlerts(func,arg) {
+	alert(arg);
+	func(arg);
+}
+makeTwoAlerts(alert,'hi');
+
 //Callbacks - exercise
 What if we wanted to write a function that calls a function twice?
 
@@ -678,6 +684,181 @@ var addArrayElements = splat(function(x, y) { return x + y });
 addArrayElements([1, 2]);
 
 //forEach
+
+function each(arr,fun) {
+    for (var i = 0; i < arr.length; i++) {
+        fun(arr[i], i , arr);
+    }
+}
+
+function each(collection,fun) {
+    if ( Array.isArray(collection) ) {
+    	for (var i = 0; i < collection.length; i++) {
+	        fun(collection[i], i, collection);
+	    }
+    }
+    else {
+    	for (var i  in collection) {
+	        fun(collection[i], i, collection);
+	    }
+    }
+}
+
+//map with each
+function map(list, iteratee) { 
+	var result = [];
+	each( list, function(elem, i, list) {
+		result.push( iteratee(elem, i, list) );
+	});
+    return result;
+}
+
+//map
+function newMap(list, iteratee) { 
+	var result = [];
+	for (var i = 0; i < list.length; i++) {
+        result.push( iteratee(list[i], i , list) );
+    }
+    return result;
+}
+
+//reduce with each 
+function reduce(list, iteratee, memo) { 
+	if (memo !== undefined) {
+		each( list, function(elem, i, list) ) {
+			memo = iteratee(memo, elem, i , list);
+		});
+	} else {
+		memo = list[0];
+		each( list, function(elem, i, list) ) {
+			memo = iteratee(memo, list[i+1], i+1 , list);
+		});
+	} 
+	
+    return memo;
+}
+
+//reduce
+function newReduce(list, iteratee, memo) { 
+	if (memo !== undefined) {
+		for (var i = 0; i < list.length; i++) {
+	        memo = iteratee(memo, list[i], i , list);
+	    }
+	} else {
+		memo = list[0];
+		for (var i = 1; i < list.length; i++) {
+	        memo = iteratee(memo, list[i], i , list);
+	    }
+	} 
+	
+    return memo;
+}
+
+
+//filter with each
+function filter(list, predicate) { 
+	var result = [];
+	each( list, function(elem, i, list) {
+		if( predicate(elem, i , list) ) {
+			result.push( elem );
+		}
+	});
+
+    return result;
+}
+
+
+//filter
+function newFilter(list, predicate) { 
+	var result = [];
+	for (var i = 0; i < list.length; i++) {
+		if( predicate(list[i], i , list) ) {
+			result.push( list[i] );
+		}
+    }
+    return result;
+}
+
+//first
+function first(list, n) { 
+	if (n === undefined) {
+		return list[0];
+	} else {
+		var result = [];
+		for (var i = 0; i < n; i++) {
+			result.push( list[i] );
+		}
+	}
+
+    return result;
+}
+
+//last
+function last(list, n) { 
+	if (n === undefined) {
+		return list[ list.length - 1 ];
+	} else {
+		var result = [];
+		for (var i = list.length - n; i < list.length; i++) {
+			result.push( list[i] );
+		}
+	}
+	
+    return result;
+}
+
+//unique
+//Note: if i could remove an element from a array, i could loop through the array and remove all of the 
+//subsequent elements that have the same value. But how to remove an element?
+function unique(list) {
+	var result = [];
+
+	checkEachElement: for (var i = 0; i < list.length; i++) {
+		for (var k = 0; k < result.length; k++) {
+			if ( list[i] === result[k] ) continue checkEachElement;
+		}
+		result.push( list[i] );
+    }
+
+    return result;
+}
+
+
+//every
+function every(list, predicate) { 
+	var check = true;
+
+	each( list, function(elem, i, list) {
+		if( !predicate(elem, i , list) ) check = false;
+	});
+
+    return check;
+}
+
+//some
+function some(list, predicate) { 
+	var check = false;
+
+	each( list, function(elem, i, list) {
+		if( predicate(elem, i , list) ) check = true;
+	});
+
+    return check;
+}
+
+
+//contains
+function contains(list, value) {
+	var check = false;
+
+	each( list, function(elem, i, list) {
+		if( elem === value ) check = true;
+	});
+
+	return check;
+}
+
+
 
 //Write filter
 Looks through each value in the list, returning an array of all the values that pass a truth test (predicate).

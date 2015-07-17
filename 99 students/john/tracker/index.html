@@ -1,0 +1,272 @@
+<!doctype html>
+<html class="no-js" lang="">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Tracker Tractor</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <style>
+    body {
+        padding-top: 50px;
+        padding-bottom: 20px;
+    }
+    </style>
+    <link rel="stylesheet" href="css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="css/main.css">
+    <script src="js/vendor/jquery-1.11.3.min.js"></script>
+    <script src="js/vendor/modernizr-2.8.3.min.js"></script>
+</head>
+
+<body>
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">Tracker Tractor</a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+                <div id="loggedOutNav">
+                    <form class="navbar-form navbar-right" role="form" name="loginForm">
+                        <div class="form-group">
+                            <input id="logInEmail" type="text" placeholder="Email" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <input id="logInPass" type="password" placeholder="Password" class="form-control">
+                        </div>
+                        <button type="button" class="btn btn-success" onclick="logIn()">Sign in</button>
+                        &nbsp;&nbsp;&nbsp;
+                        <button type="button" class="btn btn-info" data-toggle="modal" data-target="#modalRegister">Register</button>
+                    </form>
+                </div>
+                <div id="loggedInNav" style="display:none">
+                    <form class="navbar-form navbar-right" role="form">
+                        <p class="navbar-text" style="margin-top:7px;margin-bottom:7px;">Welcome!</p>
+                        &nbsp;&nbsp;&nbsp;
+                        <button type="button" class="btn btn-danger" onclick="logOut()">Log Out</button>
+                    </form>
+                </div>
+            </div>
+            <!--/.navbar-collapse -->
+        </div>
+    </nav>
+    <!-- Main jumbotron for a primary marketing message or call to action -->
+    <div class="jumbotron">
+        <div class="container">
+            <img style="margin:20px;float:right;" src="img/tractor.png" width="200">
+            <h1>Tracker Tractor</h1>
+            <p>Are your journals weighing you down? Let Tracker Tractor haul those entries for you.</p>
+        </div>
+    </div>
+    <div class="container">
+        <!-- Example row of columns -->
+        <div class="row">
+            <div class="col-md-4">
+                <h2>Write a New Entry</h2>
+                <form>
+                    <div class="form-group">
+                        <label for="inputStart">Start (Date and Time)*</label>
+                        <input type="datetime-local" class="form-control" id="inputStart" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputEnd">End (Date and Time)*</label>
+                        <input type="datetime-local" class="form-control" id="inputEnd" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputDescription">Description</label>
+                        <textarea class="form-control" rows="3" id="inputDescription"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputTags">Tags (Separate with commas) </label>
+                        <input type="text" class="form-control" id="inputTags">
+                    </div>
+                </form>
+                <p><em>*Required</em></p>
+                <button onclick="addEntry()" class="btn btn-primary">Save New Entry</button>
+                <div id="dateWarning" class="alert alert-danger" role="alert" style="display:none;margin-top:10px;">
+                    <strong>Warning!</strong> Somethings wrong with those start and end dates.
+                </div>
+                <div id="entrySuccess" class="alert alert-success" role="alert" style="display:none;margin-top:10px;">
+                    <strong>Way to go!</strong> You created that entry without a hitch.
+                </div>
+            </div>
+            <div class="col-md-8">
+                <h2>Your Entries</h2>
+                <p id="noEntryMessage" class="bg-info" style="padding:20px">Uh oh... You haven't written any entries yet. Tracker Tractor is feeling bored.</p>
+                <table id="entryTable" class="table table-hover" style="display:none;">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Minutes</th>
+                            <th>Description</th>
+                            <th>Tags</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody id="entryRows">
+                    </tbody>
+                    <script id="entry-row-template" type="text/x-handlebars-template">
+                        <tr data-entry-id="{{id}}">
+                            <td>{{startString}}</td>
+                            <td>{{duration}}</td>
+                            <td>{{description}}</td>
+                            <td>{{tags}}</td>
+                            <td>
+                                <button style="float:none;" onclick="editEntry(this)" type="button" class="close" aria-label="Close" data-toggle="modal" data-target="#modalEdit"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></button>&nbsp;
+                                <button style="float:none;" onclick="removeEntry(this)" type="button" class="close" aria-label="Close"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
+                            </td>
+                        </tr>
+                    </script>
+                </table>
+                <hr style="margin-top:40px">
+                <h2>Your Stats</h2>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="panel panel-info">
+                            <div class="panel-heading">
+                                <h3 class="panel-title" id="panel-title">By Day</h3>
+                            </div>
+                            <div class="panel-body">
+                                <table id="statsByDayTable" class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>Day</th>
+                                            <th>Minutes</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="statsByDayRows">
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="panel panel-info">
+                            <div class="panel-heading">
+                                <h3 class="panel-title" id="panel-title">By Month</h3>
+                            </div>
+                            <div class="panel-body">
+                                <table id="statsByMonthTable" class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>Month</th>
+                                            <th>Minutes</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="statsByMonthRows">
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="panel panel-info">
+                            <div class="panel-heading">
+                                <h3 class="panel-title" id="panel-title">By Tag</h3>
+                            </div>
+                            <div class="panel-body">
+                                <table id="statsByTagTable" class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>Tag</th>
+                                            <th>Minutes</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="statsByTagRows">
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Modal window for editing entries -->
+        <div class="modal fade" id="modalEdit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">Edit Entry</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <div class="form-group">
+                                <label for="editStart">Start (Date and Time)*</label>
+                                <input type="datetime-local" class="form-control" id="editStart" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="editEnd">End (Date and Time)*</label>
+                                <input type="datetime-local" class="form-control" id="editEnd" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="editDescription">Description</label>
+                                <textarea class="form-control" rows="3" id="editDescription"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="editTags">Tags (Separate tags with commas) </label>
+                                <input type="text" class="form-control" id="editTags">
+                            </div>
+                        </form>
+                        <p><em>*Required</em></p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button id="editSaveButton" type="button" class="btn btn-primary" data-dismiss="modal">Save changes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Modal window for user registration -->
+        <div class="modal fade" id="modalRegister" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">Create an Account</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form id="userForm">
+                            <div class="form-group">
+                                <label for="userInputName">First Name</label>
+                                <input type="text" class="form-control" id="userInputName" placeholder="First Name">
+                            </div>
+                            <div class="form-group">
+                                <label for="userInputEmail">Email address</label>
+                                <input type="email" class="form-control" id="userInputEmail" placeholder="Email">
+                            </div>
+                            <div class="form-group">
+                                <label for="userInputPassword">Password</label>
+                                <input type="password" class="form-control" id="userInputPassword" placeholder="Password">
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                        <button id="saveNewUser" type="button" class="btn btn-primary" data-dismiss="modal" onclick="registerNewUser()">Submit</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <footer>
+            <p>&copy; Tracker Tracktor 2015</p>
+        </footer>
+    </div>
+    <!-- /container -->
+    <script src="js/vendor/bootstrap.min.js"></script>
+    <script src="js/vendor/moment.min.js"></script>
+    <script src="js/vendor/underscore.min.js"></script>
+    <script src="js/vendor/handlebars-v3.0.3.js"></script>
+    <script src="js/vendor/backbone.js"></script>
+    <script src="js/tracker.js"></script>
+</body>
+
+</html>
